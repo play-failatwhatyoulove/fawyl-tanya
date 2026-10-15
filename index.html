@@ -1,788 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tanya | FAWYL Original Tester</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --pink:#ff3cac;
-  --blue:#4de0ff;
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
   --yellow:#ffe600;
+  --pink:#ff3ca6;
+  --blue:#34d9ff;
+  --purple:#824cff;
   --green:#39ff14;
   --orange:#ff6f1f;
-  --purple:#8d5cff;
-  --cream:#fff8df;
-  --ink:#101014;
-  --muted:#c9c3da;
+  --black:#111111;
+  --cream:#fffcef;
+  --white:#ffffff;
+  --red:#ff3b3b;
 }
 
-*{
+* {
   box-sizing:border-box;
 }
 
-html{
+html {
   scroll-behavior:smooth;
 }
 
-body{
+body {
   margin:0;
-  min-height:100vh;
   font-family:"Karla",sans-serif;
-  color:white;
-  overflow-x:hidden;
   background:
-    radial-gradient(circle at 10% 10%, rgba(255,60,172,.18), transparent 30%),
-    radial-gradient(circle at 90% 15%, rgba(77,224,255,.14), transparent 32%),
-    radial-gradient(circle at 50% 80%, rgba(141,92,255,.16), transparent 35%),
-    #09090d;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.18;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size:32px 32px;
-}
-
-a{
-  color:inherit;
+    radial-gradient(circle at top left,rgba(255,60,166,.25),transparent 35%),
+    radial-gradient(circle at bottom right,rgba(52,217,255,.25),transparent 35%),
+    #101018;
+  color:white;
 }
 
 button,
-textarea{
+input,
+textarea,
+select {
   font:inherit;
 }
 
-button{
+button {
   cursor:pointer;
 }
 
-.page{
-  width:min(1100px, calc(100% - 28px));
-  margin:0 auto;
-  padding:26px 0 80px;
-}
-
-.topbar{
+.page {
+  min-height:100vh;
+  padding:70px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:18px;
-  margin-bottom:26px;
+  justify-content:center;
 }
 
-.logo{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:clamp(1.4rem,4vw,2rem);
-  font-weight:700;
-  letter-spacing:-.05em;
+.container {
+  width:min(900px,100%);
 }
 
-.logo span:nth-child(1){color:var(--pink);}
-.logo span:nth-child(2){color:var(--yellow);}
-.logo span:nth-child(3){color:var(--blue);}
-.logo span:nth-child(4){color:var(--green);}
-
-.card-count{
-  padding:8px 13px;
-  border:2px solid white;
-  border-radius:999px;
-  font-weight:800;
-  font-size:.84rem;
-  background:#111116;
-  box-shadow:4px 4px 0 var(--pink);
-}
-
-.panel{
+.card {
+  background:var(--cream);
+  color:var(--black);
+  border:4px solid var(--black);
+  border-radius:28px;
+  padding:45px;
+  box-shadow:12px 12px 0 var(--black);
   position:relative;
-  background:rgba(17,17,23,.92);
-  border:2px solid var(--cream);
-  border-radius:24px;
-  padding:clamp(22px,5vw,42px);
-  margin:20px 0;
-  box-shadow:
-    10px 10px 0 rgba(255,60,172,.38),
-    0 18px 60px rgba(0,0,0,.25);
   overflow:hidden;
 }
 
-.panel::after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  background:var(--blue);
-  filter:blur(90px);
-  opacity:.06;
-  top:-60px;
-  right:-60px;
-  pointer-events:none;
-}
-
-.eyebrow{
+.badge {
   display:inline-block;
-  margin-bottom:10px;
-  color:var(--yellow);
-  text-transform:uppercase;
-  letter-spacing:.15em;
-  font-size:.75rem;
+  background:var(--yellow);
+  border:3px solid var(--black);
+  border-radius:999px;
+  padding:8px 16px;
+  font-size:.85rem;
   font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:20px;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-family:"Space Grotesk",sans-serif;
   margin-top:0;
 }
 
-h1{
-  font-size:clamp(2.5rem,8vw,5.4rem);
+h1 {
+  font-size:clamp(3rem,9vw,6.4rem);
   line-height:.9;
-  letter-spacing:-.07em;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
-h2{
-  font-size:clamp(1.8rem,5vw,3rem);
+h2 {
+  font-size:clamp(2.1rem,6vw,4rem);
   line-height:1;
-  letter-spacing:-.05em;
 }
 
-p{
-  font-size:1.04rem;
-  line-height:1.58;
+h3 {
+  font-size:1.5rem;
 }
 
-.big-copy{
-  max-width:720px;
-  color:#eeeaf6;
-  font-size:1.12rem;
+.big-copy {
+  font-size:1.3rem;
+  line-height:1.6;
+  max-width:700px;
 }
 
-.tanya{
-  color:var(--pink);
-  text-shadow:3px 3px 0 rgba(77,224,255,.35);
+.small {
+  opacity:.7;
 }
 
-.merch-note{
-  margin:28px 0;
-  padding:16px 18px;
-  border:2px dashed var(--yellow);
-  border-radius:16px;
-  background:rgba(255,230,0,.07);
-}
-
-.merch-note strong{
-  color:var(--yellow);
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border:2px solid #111;
-  border-radius:13px;
-  padding:13px 20px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.03em;
-  text-decoration:none;
-  background:var(--yellow);
-  color:#111;
-  box-shadow:5px 5px 0 var(--pink);
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-
-.btn:hover{
-  transform:translate(2px,2px);
-  box-shadow:3px 3px 0 var(--pink);
-}
-
-.btn.alt{
-  background:var(--blue);
-  box-shadow:5px 5px 0 var(--purple);
-}
-
-.btn.pink{
+.btn {
+  border:3px solid var(--black);
+  border-radius:15px;
   background:var(--pink);
+  color:var(--black);
+  padding:15px 22px;
+  font-weight:900;
+  box-shadow:5px 5px 0 var(--black);
+  transition:.15s ease;
+  display:inline-block;
+  text-decoration:none;
+  margin-top:18px;
+}
+
+.btn:hover {
+  transform:translate(3px,3px);
+  box-shadow:2px 2px 0 var(--black);
+}
+
+.btn.blue {
+  background:var(--blue);
+}
+
+.btn.yellow {
+  background:var(--yellow);
+}
+
+.btn.green {
+  background:var(--green);
+}
+
+.merch-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin:30px 0;
+}
+
+.merch {
+  padding:20px;
+  border:3px solid var(--black);
+  border-radius:18px;
+  font-weight:800;
+  background:white;
+}
+
+.status {
+  margin-top:30px;
+  background:var(--black);
   color:white;
-  box-shadow:5px 5px 0 var(--blue);
+  border-radius:18px;
+  padding:25px;
 }
 
-.btn.dark{
-  background:#16161d;
-  color:white;
-  border-color:white;
-  box-shadow:5px 5px 0 var(--green);
+.status p {
+  margin:8px 0;
 }
 
-.hidden{
-  display:none !important;
+/* SCRATCH */
+
+.scratch-wrap {
+  max-width:680px;
+  margin:30px auto;
 }
 
-/* SCRATCH CARD */
-
-.scratch-wrap{
-  max-width:720px;
-  margin:26px auto 0;
-}
-
-.scratch-card{
+.scratch-card {
   position:relative;
-  min-height:320px;
-  border-radius:24px;
+  width:100%;
+  min-height:330px;
+  border:4px solid var(--black);
+  border-radius:25px;
   overflow:hidden;
-  border:3px solid white;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.25), transparent 20%),
-    linear-gradient(135deg,#7e35ff,#ff3cac 45%,#4de0ff);
-  box-shadow:0 22px 70px rgba(0,0,0,.38);
+    radial-gradient(circle at top left,var(--pink),transparent 50%),
+    linear-gradient(135deg,var(--purple),var(--blue));
 }
 
-.reveal-under{
-  position:absolute;
-  inset:0;
+.reveal-content {
+  min-height:330px;
+  padding:45px 25px;
+  text-align:center;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
-  padding:30px;
-  text-align:center;
+  color:white;
 }
 
-.reveal-under small{
-  font-weight:900;
-  letter-spacing:.18em;
-  color:var(--yellow);
+.reveal-content h2 {
+  font-size:clamp(2.5rem,8vw,5rem);
+  margin-bottom:10px;
 }
 
-.reveal-under h3{
-  font-size:clamp(2.3rem,7vw,4.5rem);
-  margin:10px 0;
-  line-height:.9;
-}
-
-.reveal-under p{
-  max-width:500px;
-  margin:0;
-}
-
-#scratchCanvas{
+#scratchCanvas {
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   touch-action:none;
+  cursor:crosshair;
+  z-index:5;
 }
 
-.scratch-help{
+.scratch-note {
   text-align:center;
-  color:var(--muted);
-  margin-top:13px;
-  font-size:.9rem;
+  font-weight:800;
+  margin-top:12px;
 }
 
-/* GAME INFO */
+/* GAME */
 
-.rules-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin:24px 0;
+.game-area {
+  display:none;
 }
 
-.rule{
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:16px;
-  padding:15px;
-  background:#0d0d12;
+.game-panel {
+  border:3px solid var(--black);
+  border-radius:22px;
+  padding:25px;
+  background:white;
+  margin-top:25px;
 }
 
-.rule b{
-  display:block;
-  color:var(--blue);
-  margin-bottom:5px;
-}
-
-.rule:nth-child(2) b{color:var(--yellow);}
-.rule:nth-child(3) b{color:var(--pink);}
-.rule:nth-child(4) b{color:var(--green);}
-
-.game-shell{
-  margin-top:24px;
-  padding:18px;
-  border:3px solid white;
-  border-radius:24px;
-  background:#08080c;
-}
-
-.game-hud{
+.game-top {
   display:flex;
   justify-content:space-between;
   gap:12px;
   flex-wrap:wrap;
-  margin-bottom:14px;
+  margin-bottom:20px;
 }
 
-.hud-box{
-  flex:1;
-  min-width:135px;
-  padding:12px 14px;
-  border-radius:14px;
-  background:#15151c;
-  border:1px solid rgba(255,255,255,.15);
+.stat-box {
+  border:3px solid var(--black);
+  border-radius:16px;
+  padding:12px 18px;
+  background:var(--yellow);
+  font-weight:900;
 }
 
-.hud-label{
-  font-size:.68rem;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  color:#aaa6b7;
-  font-weight:800;
+.stat-box span {
+  font-size:1.5rem;
 }
 
-.hud-value{
-  margin-top:3px;
-  font-family:"Space Grotesk",sans-serif;
-  font-weight:700;
-  font-size:1.35rem;
+.tangle-status {
+  border:3px solid var(--black);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:18px;
+  background:var(--pink);
+  font-weight:900;
+  text-align:center;
 }
 
-.timer-danger{
-  color:#ff5a5a !important;
-  animation:pulse .65s infinite alternate;
-}
-
-@keyframes pulse{
-  to{
-    transform:scale(1.04);
-    text-shadow:0 0 15px currentColor;
-  }
-}
-
-#gameBoard{
+.cord-board {
   position:relative;
   width:100%;
-  aspect-ratio:16/10;
-  min-height:430px;
-  border-radius:20px;
+  border:4px solid var(--black);
+  border-radius:22px;
   overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.07),transparent 30%),
+    #17171f;
+  margin-top:20px;
+}
+
+#cordSvg {
+  display:block;
+  width:100%;
+  height:auto;
   touch-action:none;
   user-select:none;
-  background:
-    radial-gradient(circle at center, rgba(255,60,172,.13), transparent 34%),
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
-    #101017;
-  background-size:auto, 28px 28px, 28px 28px, auto;
 }
 
-#ropeSvg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:1;
+.cord-line {
+  stroke-width:12;
+  stroke-linecap:round;
+  transition:stroke .15s ease, filter .15s ease;
 }
 
-.dock{
-  position:absolute;
-  width:74px;
-  height:74px;
-  border-radius:50%;
-  border:3px dashed rgba(255,255,255,.5);
-  display:grid;
-  place-items:center;
-  font-family:"Space Grotesk";
-  font-weight:800;
-  color:rgba(255,255,255,.6);
-  z-index:2;
-  transform:translate(-50%,-50%);
+.cord-line.clean {
+  stroke:var(--green) !important;
+  filter:drop-shadow(0 0 7px rgba(57,255,20,.7));
 }
 
-.dock.active{
-  border-color:var(--green);
-  color:var(--green);
-  background:rgba(57,255,20,.1);
-  box-shadow:0 0 28px rgba(57,255,20,.18);
+.cord-line.tangled {
+  stroke:var(--red) !important;
+  filter:drop-shadow(0 0 8px rgba(255,59,59,.7));
 }
 
-.knot{
-  position:absolute;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  transform:translate(-50%,-50%);
-  font-family:"Space Grotesk";
-  font-weight:900;
-  color:#111;
-  z-index:5;
+.endpoint {
+  stroke:#111;
+  stroke-width:5;
   cursor:grab;
-  border:3px solid #111;
-  box-shadow:0 6px 0 rgba(0,0,0,.45);
   touch-action:none;
 }
 
-.knot:active{
+.endpoint:active {
   cursor:grabbing;
-  transform:translate(-50%,-50%) scale(1.08);
 }
 
-.knot.done{
-  opacity:.2;
+.endpoint-ring {
+  fill:none;
+  stroke:white;
+  stroke-width:3;
+  opacity:.6;
   pointer-events:none;
-  transform:translate(-50%,-50%) scale(.65);
 }
 
-.object{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:94px;
-  height:94px;
-  border-radius:24px;
-  transform:translate(-50%,-50%) rotate(-7deg);
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:8px;
-  z-index:4;
-  background:linear-gradient(145deg,#ffe600,#ff8b00);
-  color:#111;
-  border:4px solid #111;
-  font-family:"Space Grotesk";
-  font-weight:900;
-  line-height:1;
-  box-shadow:
-    0 9px 0 #000,
-    0 0 35px rgba(255,230,0,.25);
-  pointer-events:none;
-  transition:all .25s ease;
-}
-
-.object.free{
-  pointer-events:auto;
-  cursor:grab;
-  animation:objectFree .6s ease both;
-}
-
-@keyframes objectFree{
-  0%{transform:translate(-50%,-50%) rotate(-7deg) scale(.7);}
-  55%{transform:translate(-50%,-50%) rotate(8deg) scale(1.18);}
-  100%{transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-}
-
-.container-bin{
-  position:absolute;
-  right:5%;
-  bottom:6%;
-  width:128px;
-  height:95px;
-  border:4px dashed var(--blue);
-  border-radius:16px 16px 28px 28px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:8px;
-  color:var(--blue);
-  font-weight:900;
-  z-index:3;
-  background:rgba(77,224,255,.07);
-}
-
-.container-bin.ready{
-  animation:binGlow .7s infinite alternate;
-}
-
-@keyframes binGlow{
-  to{
-    box-shadow:0 0 30px rgba(77,224,255,.38);
-    background:rgba(77,224,255,.14);
-  }
-}
-
-.game-overlay{
-  position:absolute;
-  inset:0;
-  z-index:30;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px;
-  background:rgba(5,5,8,.89);
-  backdrop-filter:blur(4px);
-}
-
-.game-overlay h3{
-  font-size:clamp(2rem,6vw,4rem);
-  margin-bottom:8px;
-}
-
-.game-overlay p{
-  max-width:600px;
-  color:#dcd7e8;
-}
-
-.status-line{
-  margin:15px 0 4px;
-  min-height:27px;
+.board-label {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:16px;
   font-weight:800;
-  color:var(--yellow);
+  fill:white;
+  opacity:.35;
+  pointer-events:none;
+}
+
+.game-message {
+  min-height:52px;
+  margin-top:18px;
+  padding:13px;
+  border:3px solid var(--black);
+  border-radius:14px;
+  background:var(--blue);
+  font-weight:900;
   text-align:center;
 }
 
-.controls-row{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
+.result-box {
+  display:none;
+  margin-top:25px;
+  padding:25px;
+  border:3px solid var(--black);
+  border-radius:18px;
+  background:var(--yellow);
+  text-align:center;
+}
+
+.result-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+
+.result-stat {
+  border:3px solid var(--black);
+  border-radius:14px;
+  padding:15px;
+  background:white;
+}
+
+.result-stat strong {
+  display:block;
+  font-size:1.8rem;
 }
 
 /* FEEDBACK */
 
-.feedback-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+.feedback {
+  display:none;
 }
 
-.field label{
+.rating-row {
+  margin:25px 0;
+}
+
+.rating-row label {
   display:block;
-  font-weight:800;
-  margin-bottom:7px;
+  font-weight:900;
+  margin-bottom:8px;
 }
 
-textarea{
+.rating-row select,
+textarea {
   width:100%;
-  min-height:120px;
+  padding:14px;
+  border:3px solid var(--black);
+  border-radius:12px;
+  background:white;
+}
+
+textarea {
+  min-height:110px;
   resize:vertical;
-  background:#0d0d12;
-  color:white;
-  border:2px solid #373743;
-  border-radius:14px;
-  padding:13px;
-  outline:none;
+  margin-top:8px;
 }
 
-textarea:focus{
-  border-color:var(--blue);
+/* COLLECTOR */
+
+.collector-section {
+  display:none;
 }
 
-.feedback-saved{
-  margin-top:13px;
-  color:var(--green);
-  font-weight:800;
+.flip-wrap {
+  perspective:1600px;
+  max-width:430px;
+  margin:45px auto;
 }
 
-/* COLLECTOR CARD */
-
-.collector-stage{
-  perspective:1300px;
-  display:grid;
-  place-items:center;
-  padding:26px 0 12px;
-}
-
-.collector-card{
-  width:min(360px,88vw);
-  aspect-ratio:2.5/3.5;
+.collector-card {
   position:relative;
+  width:100%;
+  aspect-ratio:2.5 / 3.5;
   transform-style:preserve-3d;
-  transition:transform .75s cubic-bezier(.2,.8,.2,1);
+  transition:transform .75s cubic-bezier(.2,.7,.2,1);
   cursor:pointer;
 }
 
-.collector-card.flipped{
+.collector-card.flipped {
   transform:rotateY(180deg);
 }
 
-.collector-face{
+.card-face {
   position:absolute;
   inset:0;
   backface-visibility:hidden;
   border-radius:26px;
-  border:3px solid rgba(255,255,255,.88);
+  padding:28px;
   overflow:hidden;
+  border:2px solid rgba(255,255,255,.55);
   box-shadow:
-    0 24px 70px rgba(0,0,0,.5),
-    inset 0 0 35px rgba(255,255,255,.17);
+    0 0 0 2px #111,
+    0 20px 60px rgba(0,0,0,.45),
+    inset 0 0 30px rgba(255,255,255,.08);
 }
 
-.collector-front{
-  color:#111;
-  background:
-    linear-gradient(115deg,
-      #fdfdfd 0%,
-      #8ffcff 13%,
-      #fff 25%,
-      #ffa4e3 38%,
-      #ffe66a 52%,
-      #9f8cff 68%,
-      #9bffcf 82%,
-      #fff 100%);
-}
-
-.collector-front::before{
+.card-face::before {
   content:"";
   position:absolute;
-  inset:-60%;
-  background:linear-gradient(
-    100deg,
-    transparent 38%,
-    rgba(255,255,255,.7) 48%,
-    transparent 58%
-  );
-  transform:rotate(15deg);
-  animation:holo 5s linear infinite;
+  inset:0;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255,255,255,.35) 12%,
+      transparent 22%,
+      rgba(0,255,255,.18) 38%,
+      rgba(255,0,255,.15) 52%,
+      transparent 68%,
+      rgba(255,255,255,.28) 82%,
+      transparent 100%
+    );
+  mix-blend-mode:screen;
+  pointer-events:none;
 }
 
-@keyframes holo{
-  from{translate:-35% 0;}
-  to{translate:35% 0;}
+.card-face::after {
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(0,255,255,.15),
+      rgba(255,0,255,.18),
+      rgba(255,255,0,.12),
+      rgba(0,255,255,.15)
+    );
+  animation:holoSpin 8s linear infinite;
+  opacity:.45;
+  pointer-events:none;
 }
 
-.card-inner{
+@keyframes holoSpin {
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+.card-front {
+  background:
+    linear-gradient(
+      145deg,
+      #0b0b0f 0%,
+      #1c1c22 28%,
+      #444851 48%,
+      #111318 68%,
+      #050506 100%
+    );
+  color:white;
+}
+
+.card-back {
+  background:
+    linear-gradient(
+      145deg,
+      #16181d 0%,
+      #3d4148 30%,
+      #111 55%,
+      #22262d 100%
+    );
+  color:white;
+  transform:rotateY(180deg);
+}
+
+.card-content {
   position:relative;
-  z-index:2;
-  height:100%;
+  z-index:3;
+}
+
+.card-topline {
   display:flex;
-  flex-direction:column;
-  padding:25px;
+  justify-content:space-between;
+  align-items:center;
+  font-size:.78rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.85;
 }
 
-.card-number{
-  align-self:flex-end;
-  border:2px solid #111;
+.chrome-title {
+  margin-top:36px;
+  font-size:clamp(2.4rem,8vw,4.2rem);
+  line-height:.92;
+  letter-spacing:-.04em;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #c9c9c9 20%,
+      #ffffff 42%,
+      #7f848c 58%,
+      #eeeeee 75%,
+      #8f949c 100%
+    );
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-transform:uppercase;
+}
+
+.chrome-subtitle {
+  margin-top:16px;
+  font-size:1rem;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  color:#d9d9d9;
+}
+
+.tester-stamp {
+  display:inline-block;
+  margin-top:30px;
+  padding:8px 13px;
+  border:1px solid rgba(255,255,255,.6);
   border-radius:999px;
-  padding:5px 9px;
+  font-size:.76rem;
   font-weight:900;
-  background:rgba(255,255,255,.55);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.06);
 }
 
-.card-title{
-  margin:auto 0 8px;
-  font-size:2.8rem;
-  line-height:.86;
-  letter-spacing:-.07em;
+.card-rule {
+  height:1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.7),
+      transparent
+    );
+  margin:28px 0;
 }
 
-.card-game{
-  font-family:"Space Grotesk";
-  font-weight:900;
-  font-size:1.2rem;
-}
-
-.card-label{
-  margin-top:11px;
+.card-label {
   font-size:.72rem;
   letter-spacing:.15em;
   text-transform:uppercase;
-  font-weight:900;
+  opacity:.65;
+  margin-bottom:5px;
 }
 
-.collector-back{
-  transform:rotateY(180deg);
+.card-value {
+  font-size:1rem;
+  font-weight:800;
+  margin-bottom:18px;
+}
+
+.meter {
+  margin:7px 0 20px;
+  font-family:monospace;
+  font-size:1.35rem;
+  letter-spacing:.1em;
+}
+
+.flip-hint {
+  position:absolute;
+  bottom:22px;
+  left:28px;
+  right:28px;
+  text-align:center;
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  opacity:.7;
+}
+
+.chrome-orb {
+  position:absolute;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  right:-45px;
+  bottom:45px;
   background:
-    radial-gradient(circle at 20% 10%,rgba(255,60,172,.32),transparent 28%),
-    radial-gradient(circle at 80% 85%,rgba(77,224,255,.25),transparent 30%),
-    #09090d;
-  padding:28px;
+    radial-gradient(
+      circle at 30% 30%,
+      #ffffff 0%,
+      #a9faff 14%,
+      #7e64ff 34%,
+      #ff5ad9 50%,
+      #20242b 72%,
+      #000 100%
+    );
+  box-shadow:
+    inset -15px -15px 35px rgba(0,0,0,.5),
+    0 0 45px rgba(110,220,255,.16);
+  z-index:1;
 }
 
-.back-logo{
-  font-size:2rem;
-  color:var(--yellow);
-}
-
-.collector-back p{
-  color:#dad5e6;
-}
-
-.mini-stamp{
-  margin-top:auto;
-  border:2px solid var(--pink);
-  border-radius:14px;
-  padding:10px;
+.footer {
   text-align:center;
-  color:var(--pink);
-  font-weight:900;
-  transform:rotate(-3deg);
+  padding:70px 20px;
 }
 
-footer{
-  text-align:center;
-  color:#777384;
-  padding:40px 12px 0;
-  font-size:.85rem;
+.hidden {
+  display:none !important;
 }
 
-@media(max-width:760px){
-  .rules-grid,
-  .feedback-grid{
-    grid-template-columns:1fr 1fr;
+@media(max-width:700px) {
+  .card {
+    padding:28px 22px;
+    border-radius:20px;
+    box-shadow:7px 7px 0 var(--black);
   }
 
-  #gameBoard{
-    min-height:520px;
-    aspect-ratio:auto;
-  }
-
-  .dock{
-    width:64px;
-    height:64px;
-  }
-
-  .knot{
-    width:52px;
-    height:52px;
-  }
-}
-
-@media(max-width:520px){
-  .page{
-    width:min(100% - 18px,1100px);
-  }
-
-  .panel{
-    border-radius:18px;
-    padding:20px 16px;
-  }
-
-  .rules-grid,
-  .feedback-grid{
+  .merch-grid,
+  .result-grid {
     grid-template-columns:1fr;
   }
 
-  .game-shell{
-    padding:10px;
-  }
-
-  #gameBoard{
-    min-height:560px;
-  }
-
-  .container-bin{
-    width:105px;
-    height:80px;
+  .page {
+    padding:45px 14px;
   }
 }
 </style>
@@ -790,980 +669,1950 @@ footer{
 
 <body>
 
-<main class="page">
+<section class="page" id="welcome">
+  <div class="container">
+    <div class="card">
 
-  <div class="topbar">
-    <div class="logo">
-      <span>F</span><span>A</span><span>W</span><span>YL</span>
+      <span class="badge">FAWYL Original Tester</span>
+
+      <h1>HEY,<br>TANYA.</h1>
+
+      <p class="big-copy">
+        You found the weird little corner of the internet we made specifically for you.
+      </p>
+
+      <p class="big-copy">
+        Welcome to your <strong>FAWYL Tester Portal.</strong>
+      </p>
+
+      <p class="big-copy">
+        You're one of the first people getting your hands on
+        <em>Fail at What You Love</em> before Season 1 exists out in the world.
+      </p>
+
+      <h3>
+        If something breaks, congratulations.<br>
+        That's literally why you're here.
+      </h3>
+
+      <a href="#merch" class="btn">
+        LET'S GO →
+      </a>
+
     </div>
-    <div class="card-count">ORIGINAL TESTER • 07/09</div>
   </div>
+</section>
 
-  <!-- WELCOME -->
-  <section class="panel" id="welcome">
-    <span class="eyebrow">Private Tester Transmission</span>
-    <h1>HEY,<br><span class="tanya">TANYA.</span></h1>
+<section class="page" id="merch">
+  <div class="container">
+    <div class="card">
 
-    <p class="big-copy">
-      Your next FAWYL test is ready. This one looks simple right up until
-      your fingers and the universe decide they have separate plans.
-    </p>
+      <span class="badge">Tiny Confession</span>
 
-    <div class="merch-note">
-      <strong>Also:</strong> your tester merch is on the way — hoodie, shirt,
-      plus two bonus gifts because apparently we enjoy mailing you things.
-    </div>
+      <h2>FIRST: YOUR STUFF IS COMING. 😂</h2>
 
-    <a href="#reveal" class="btn">Reveal Today’s Game ↓</a>
-  </section>
+      <p class="big-copy">
+        I have not forgotten your merch.
+      </p>
 
+      <p class="big-copy">
+        Your merch is not lost.
+      </p>
 
-  <!-- SCRATCH REVEAL -->
-  <section class="panel" id="reveal">
-    <span class="eyebrow">Game Reveal</span>
-    <h2>Scratch it.</h2>
-    <p>No dignity required. Mouse, finger, whatever you’ve got.</p>
+      <p class="big-copy">
+        I am apparently just <strong>holding it for ransom.</strong>
+      </p>
 
-    <div class="scratch-wrap">
-      <div class="scratch-card">
-        <div class="reveal-under">
-          <small>ROUND 3</small>
-          <h3>TANGLED<br>& DOOMED</h3>
-          <p>
-            One hand. One trapped object. An unreasonable amount of rope.
-          </p>
-        </div>
-        <canvas id="scratchCanvas"></canvas>
-      </div>
+      <p>
+        Building this whole ridiculous thing is expensive, my car is currently
+        being fixed, and once it's back and I can reliably make it down the road
+        again, I'll be making deliveries and getting everything moving.
+      </p>
 
-      <div class="scratch-help">
-        Scratch away enough of the cover to unlock the game.
-      </div>
-    </div>
+      <p>
+        That's the very unglamorous behind-the-scenes truth.
+      </p>
 
-    <div id="revealContinue" class="controls-row hidden">
-      <button class="btn pink" onclick="unlockGame()">Fine. Let Me Suffer.</button>
-    </div>
-  </section>
+      <p>
+        But I didn't want you sitting around waiting for a package before you
+        got to be part of this.
+      </p>
 
+      <h3>Your Tester Drop</h3>
 
-  <!-- GAME -->
-  <section class="panel hidden" id="gameSection">
-    <span class="eyebrow">Today’s Test</span>
-    <h2>Tangled & Doomed</h2>
+      <div class="merch-grid">
 
-    <p class="big-copy">
-      The object is trapped inside the mess. Untangle the ropes using one
-      pointer, free the object, then get it into the container before time runs out.
-    </p>
-
-    <div class="rules-grid">
-      <div class="rule">
-        <b>GOAL</b>
-        Free the trapped object.
-      </div>
-
-      <div class="rule">
-        <b>TIME</b>
-        180 seconds.
-      </div>
-
-      <div class="rule">
-        <b>RULE</b>
-        One pointer only.
-      </div>
-
-      <div class="rule">
-        <b>WIN</b>
-        Object goes in the bin.
-      </div>
-    </div>
-
-    <div class="game-shell">
-
-      <div class="game-hud">
-        <div class="hud-box">
-          <div class="hud-label">Time Left</div>
-          <div class="hud-value" id="timer">3:00</div>
+        <div class="merch">
+          🧥 FAWYL Hoodie
         </div>
 
-        <div class="hud-box">
-          <div class="hud-label">Knots Freed</div>
-          <div class="hud-value"><span id="knotsDone">0</span>/6</div>
+        <div class="merch">
+          👕 FAWYL Shirt
         </div>
 
-        <div class="hud-box">
-          <div class="hud-label">Status</div>
-          <div class="hud-value" id="gameStatus">Doom Pending</div>
-        </div>
-      </div>
-
-      <div id="gameBoard">
-
-        <svg id="ropeSvg" viewBox="0 0 1000 625" preserveAspectRatio="none">
-        </svg>
-
-        <!-- TARGET DOCKS -->
-        <div class="dock" data-dock="1" style="left:10%;top:15%;">1</div>
-        <div class="dock" data-dock="2" style="left:50%;top:10%;">2</div>
-        <div class="dock" data-dock="3" style="left:90%;top:18%;">3</div>
-        <div class="dock" data-dock="4" style="left:12%;top:78%;">4</div>
-        <div class="dock" data-dock="5" style="left:47%;top:88%;">5</div>
-        <div class="dock" data-dock="6" style="left:84%;top:72%;">6</div>
-
-        <!-- KNOTS -->
-        <div class="knot" data-knot="1" style="left:42%;top:40%;background:#ff3cac;">1</div>
-        <div class="knot" data-knot="2" style="left:58%;top:38%;background:#4de0ff;">2</div>
-        <div class="knot" data-knot="3" style="left:36%;top:57%;background:#ffe600;">3</div>
-        <div class="knot" data-knot="4" style="left:62%;top:58%;background:#39ff14;">4</div>
-        <div class="knot" data-knot="5" style="left:47%;top:66%;background:#ff6f1f;">5</div>
-        <div class="knot" data-knot="6" style="left:53%;top:27%;background:#a78bfa;">6</div>
-
-        <!-- TRAPPED OBJECT -->
-        <div class="object" id="trappedObject">
-          FAWYL<br>KEY
+        <div class="merch">
+          🎁 Bonus Gift #1<br>
+          <span class="small">CLASSIFIED</span>
         </div>
 
-        <!-- FINAL CONTAINER -->
-        <div class="container-bin" id="containerBin">
-          DROP<br>HERE
-        </div>
-
-        <!-- START SCREEN -->
-        <div class="game-overlay" id="startOverlay">
-          <h3>READY TO GET<br>TANGLED?</h3>
-          <p>
-            Drag each numbered knot to the matching numbered circle.
-            Once all six ropes are removed, grab the object and get it into the bin.
-          </p>
-          <button class="btn" onclick="startGame()">START THE DISASTER</button>
-        </div>
-
-        <!-- RESULT SCREEN -->
-        <div class="game-overlay hidden" id="resultOverlay">
-          <h3 id="resultTitle">YOU DID IT.</h3>
-          <p id="resultCopy"></p>
-
-          <div class="controls-row">
-            <button class="btn" onclick="resetGame()">TRY AGAIN</button>
-            <button class="btn alt" onclick="goToFeedback()">GIVE FEEDBACK ↓</button>
-          </div>
+        <div class="merch">
+          🎁 Bonus Gift #2<br>
+          <span class="small">EXTREMELY CLASSIFIED</span>
         </div>
 
       </div>
 
-      <div class="status-line" id="statusLine">
-        Match the knots to their numbered docks.
+      <div class="status">
+
+        <strong>CURRENT STATUS:</strong>
+
+        <p>🚗 Creator currently defeated by transportation.</p>
+        <p>📦 Merch safe.</p>
+        <p>❤️ Tanya absolutely not forgotten.</p>
+
       </div>
 
-      <div class="controls-row">
-        <button class="btn dark" onclick="resetGame()">Restart Game</button>
-      </div>
+      <a href="#reveal" class="btn blue">
+        OKAY BUT WHAT DID I GET? →
+      </a>
 
     </div>
-  </section>
+  </div>
+</section>
 
+<section class="page" id="reveal">
+  <div class="container">
+    <div class="card">
 
-  <!-- FEEDBACK -->
-  <section class="panel hidden" id="feedbackSection">
-    <span class="eyebrow">Tester Debrief</span>
-    <h2>Okay Tanya, tell us what happened.</h2>
+      <span class="badge">
+        Your Game Is Waiting
+      </span>
 
-    <p>
-      There are no right answers here. If something sucked, say it sucked.
-      That is considerably more useful than pretending it was fine.
-    </p>
+      <h2>
+        SCRATCH TO REVEAL IT.
+      </h2>
 
-    <div class="feedback-grid">
+      <p>
+        Every original tester is getting an early digital version of a Season 1 game.
+      </p>
 
-      <div class="field">
-        <label for="funFeedback">Was it actually fun?</label>
-        <textarea
-          id="funFeedback"
-          placeholder="Fun, annoying, confusing, weirdly satisfying..."></textarea>
-      </div>
+      <p>
+        But I'm not just telling you which one.
+      </p>
 
-      <div class="field">
-        <label for="confusingFeedback">Anything confusing?</label>
-        <textarea
-          id="confusingFeedback"
-          placeholder="Tell us where you got stuck or what wasn't obvious."></textarea>
-      </div>
+      <p>
+        <strong>Obviously.</strong>
+      </p>
 
-      <div class="field">
-        <label for="difficultyFeedback">How was the difficulty?</label>
-        <textarea
-          id="difficultyFeedback"
-          placeholder="Too easy? Too hard? Just irritating enough?"></textarea>
-      </div>
+      <div class="scratch-wrap">
 
-      <div class="field">
-        <label for="changeFeedback">What would you change?</label>
-        <textarea
-          id="changeFeedback"
-          placeholder="Rules, timing, visuals, mechanics, anything."></textarea>
-      </div>
+        <div class="scratch-card">
 
-    </div>
-
-    <div class="controls-row" style="justify-content:flex-start;margin-top:22px;">
-      <button class="btn pink" onclick="saveFeedback()">Save My Feedback</button>
-      <button class="btn alt" onclick="showCollectorCard()">Show My Card →</button>
-    </div>
-
-    <div class="feedback-saved hidden" id="feedbackSaved">
-      ✓ Saved on this device.
-    </div>
-  </section>
-
-
-  <!-- COLLECTOR CARD -->
-  <section class="panel hidden" id="collectorSection">
-    <span class="eyebrow">Tester Collector Card</span>
-    <h2>Card 07 belongs to you.</h2>
-
-    <p>
-      Tap the card to flip it. Yes, we made it shiny. Obviously.
-    </p>
-
-    <div class="collector-stage">
-
-      <div class="collector-card" id="collectorCard">
-
-        <div class="collector-face collector-front">
-          <div class="card-inner">
-
-            <div class="card-number">07 / 09</div>
-
-            <div>
-              <div class="card-label">FAWYL Original Tester</div>
-              <h3 class="card-title">TANYA</h3>
-              <div class="card-game">Tangled & Doomed</div>
-            </div>
-
-            <div class="card-label">
-              Season One Test Crew
-            </div>
-
-          </div>
-        </div>
-
-        <div class="collector-face collector-back">
-          <div class="card-inner">
-
-            <h3 class="back-logo">FAIL AT WHAT YOU LOVE</h3>
+          <div class="reveal-content">
 
             <p>
-              Tanya entered a perfectly reasonable situation involving one
-              trapped object and several pieces of string.
+              SEASON 1 ORIGINAL TESTER EDITION
             </p>
+
+            <h2>
+              TANGLED<br>& DOOMED
+            </h2>
 
             <p>
-              It immediately became everyone’s problem.
+              <strong>ROUND:</strong>
+              And Everything Went Wrong
             </p>
 
-            <div class="mini-stamp">
-              OFFICIAL ORIGINAL TESTER
-            </div>
+            <button class="btn yellow" id="openGameBtn">
+              OPEN MY GAME →
+            </button>
 
           </div>
+
+          <canvas id="scratchCanvas"></canvas>
+
+        </div>
+
+        <div class="scratch-note">
+          👆 Use your mouse or finger to scratch the card.
         </div>
 
       </div>
 
     </div>
+  </div>
+</section>
 
-    <p style="text-align:center;color:#aaa6b7;">
-      Card 07/09 • Tanya • Tangled & Doomed
-    </p>
-  </section>
+<section class="page game-area" id="game">
+  <div class="container">
+    <div class="card">
 
+      <span class="badge">
+        Season 1 Test Game
+      </span>
 
-  <footer>
-    FAIL AT WHAT YOU LOVE • ORIGINAL TESTER PORTAL
-  </footer>
+      <h2>
+        TANGLED & DOOMED
+      </h2>
 
-</main>
+      <p class="big-copy">
+        Six cords.
+      </p>
 
+      <h3>
+        Your job is to make none of them cross.
+      </h3>
+
+      <div class="status">
+
+        <strong>HOW THIS WORKS</strong>
+
+        <p>🔌 Drag the big colored ends around.</p>
+        <p>🔴 Red cords are still tangled.</p>
+        <p>🟢 Green cords are clear.</p>
+        <p>⏱️ You have 60 seconds.</p>
+        <p>💀 Fixing one tangle may create another. That's between you and the drawer.</p>
+
+      </div>
+
+      <div class="game-panel">
+
+        <div class="game-top">
+
+          <div class="stat-box">
+            TIME:
+            <span id="timer">60</span>
+          </div>
+
+          <div class="stat-box">
+            MOVES:
+            <span id="moves">0</span>
+          </div>
+
+        </div>
+
+        <div class="tangle-status">
+          TANGLES REMAINING:
+          <span id="tangleCount">0</span>
+        </div>
+
+        <button class="btn blue" id="startGameBtn">
+          OPEN THE CORD DRAWER →
+        </button>
+
+        <div class="cord-board">
+
+          <svg
+            id="cordSvg"
+            viewBox="0 0 700 450"
+            aria-label="Untangle the cords"
+          >
+
+            <text
+              x="350"
+              y="35"
+              text-anchor="middle"
+              class="board-label"
+            >
+              THE DRAWER WHERE CHARGERS GO TO DIE
+            </text>
+
+            <g id="linesLayer"></g>
+            <g id="pointsLayer"></g>
+
+          </svg>
+
+        </div>
+
+        <div class="game-message" id="gameMessage">
+          Hit start when you're ready to deal with whatever happened in this drawer.
+        </div>
+
+        <div class="result-box" id="resultBox">
+
+          <h2 id="resultTitle">
+            UNTANGLED.
+          </h2>
+
+          <div class="result-grid">
+
+            <div class="result-stat">
+              <strong id="resultCords">0 / 6</strong>
+              CORDS CLEAR
+            </div>
+
+            <div class="result-stat">
+              <strong id="resultCreated">0</strong>
+              NEW TANGLES CREATED
+            </div>
+
+            <div class="result-stat">
+              <strong id="resultTime">0</strong>
+              SECONDS LEFT
+            </div>
+
+          </div>
+
+          <h3 id="verdict">
+            Results pending.
+          </h3>
+
+          <button class="btn" id="feedbackBtn">
+            GIVE TESTER FEEDBACK →
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="page feedback" id="feedback">
+  <div class="container">
+    <div class="card">
+
+      <span class="badge">
+        Tester Check-In
+      </span>
+
+      <h2>
+        WELL.
+      </h2>
+
+      <p class="big-copy">
+        You entered the cord drawer.
+      </p>
+
+      <p>
+        Whether you left it better than you found it is now part of the official record.
+      </p>
+
+      <div class="rating-row">
+
+        <label>
+          How fun was it?
+        </label>
+
+        <select id="funRating">
+          <option value="">Choose one</option>
+          <option>⭐</option>
+          <option>⭐⭐</option>
+          <option>⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐⭐</option>
+        </select>
+
+      </div>
+
+      <div class="rating-row">
+
+        <label>
+          How easy were the rules to understand?
+        </label>
+
+        <select id="rulesRating">
+          <option value="">Choose one</option>
+          <option>⭐</option>
+          <option>⭐⭐</option>
+          <option>⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐⭐</option>
+        </select>
+
+      </div>
+
+      <div class="rating-row">
+
+        <label>
+          How difficult was the actual game?
+        </label>
+
+        <select id="difficultyRating">
+          <option value="">Choose one</option>
+          <option>⭐</option>
+          <option>⭐⭐</option>
+          <option>⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐</option>
+          <option>⭐⭐⭐⭐⭐</option>
+        </select>
+
+      </div>
+
+      <div class="rating-row">
+
+        <label>
+          Would you willingly play this again?
+        </label>
+
+        <select id="playAgain">
+          <option value="">Choose one</option>
+          <option>Absolutely</option>
+          <option>Maybe</option>
+          <option>I have suffered enough</option>
+        </select>
+
+      </div>
+
+      <div class="rating-row">
+        <label>What confused you?</label>
+        <textarea id="confused"></textarea>
+      </div>
+
+      <div class="rating-row">
+        <label>What was your favorite part?</label>
+        <textarea id="favorite"></textarea>
+      </div>
+
+      <div class="rating-row">
+        <label>What would you change?</label>
+        <textarea id="change"></textarea>
+      </div>
+
+      <div class="rating-row">
+        <label>Did anything break or behave weirdly?</label>
+        <textarea id="broken"></textarea>
+      </div>
+
+      <button class="btn green" id="submitFeedback">
+        SAVE MY FEEDBACK →
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<section class="page collector-section" id="collector">
+  <div class="container">
+    <div class="card">
+
+      <span class="badge">
+        One More Thing
+      </span>
+
+      <h2>
+        YOUR COLLECTOR CARD.
+      </h2>
+
+      <p>
+        You're part of the group helping build Season 1.
+      </p>
+
+      <h3>
+        Which means you're officially one of the people who were here before we knew whether any of this actually worked.
+      </h3>
+
+      <div class="flip-wrap">
+
+        <div class="collector-card" id="collectorCard">
+
+          <div class="card-face card-front">
+
+            <div class="chrome-orb"></div>
+
+            <div class="card-content">
+
+              <div class="card-topline">
+                <span>FAWYL // ORIGINAL TESTER</span>
+                <span>07 / 09</span>
+              </div>
+
+              <div class="card-rule"></div>
+
+              <div class="chrome-title">
+                TANYA
+              </div>
+
+              <div class="chrome-subtitle">
+                Tangled & Doomed
+              </div>
+
+              <div class="tester-stamp">
+                Pre-Season Test Run
+              </div>
+
+              <div class="card-rule"></div>
+
+              <div class="card-label">
+                Classification
+              </div>
+
+              <div class="card-value">
+                Original Season 1 Tester
+              </div>
+
+              <div class="card-label">
+                Status
+              </div>
+
+              <div class="card-value">
+                Untangled Eventually. Emotionally Unclear.
+              </div>
+
+              <div class="flip-hint">
+                Tap to flip →
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-face card-back">
+
+            <div class="card-content">
+
+              <div class="card-topline">
+                <span>FAIL AT WHAT YOU LOVE</span>
+                <span>SEASON 1</span>
+              </div>
+
+              <div class="card-rule"></div>
+
+              <div class="chrome-title" style="font-size:2.1rem;">
+                TANGLED<br>& DOOMED
+              </div>
+
+              <div class="card-rule"></div>
+
+              <div class="card-label">
+                Round
+              </div>
+
+              <div class="card-value">
+                And Everything Went Wrong
+              </div>
+
+              <div class="card-label">
+                Mission
+              </div>
+
+              <div class="card-value">
+                Untangle six cords without creating an entirely new electrical nightmare.
+              </div>
+
+              <div class="card-label">
+                FAWYL Difficulty
+              </div>
+
+              <div class="meter">
+                ████░
+              </div>
+
+              <div class="card-label">
+                Chance of making it worse first
+              </div>
+
+              <div class="meter">
+                █████
+              </div>
+
+              <div class="card-label">
+                Original Tester
+              </div>
+
+              <div class="card-value">
+                Tanya
+              </div>
+
+              <div class="flip-hint">
+                Tap to flip back →
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <p style="text-align:center;">
+        A physical version of this collector card is planned as part of the Season 1 game collection.
+      </p>
+
+      <p style="text-align:center;">
+        <strong>
+          Meaning yes. You get to say you had yours first.
+        </strong>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+
+  <h2>
+    THANK YOU, TANYA.
+  </h2>
+
+  <p>For being early.</p>
+  <p>For being patient.</p>
+  <p>For helping build this while we're still figuring it out.</p>
+
+  <br>
+
+  <h3>
+    DO THE THING.<br>
+    FAIL AT THE THING.<br>
+    LOVE THE THING.
+  </h3>
+
+  <p>— FAWYL</p>
+
+</footer>
 
 <script>
-/* =========================================================
+
+/* =========================
    SCRATCH CARD
-========================================================= */
+========================= */
 
-const scratchCanvas = document.getElementById("scratchCanvas");
-const scratchCtx = scratchCanvas.getContext("2d");
+const scratchCanvas =
+  document.getElementById("scratchCanvas");
 
-let scratching = false;
-let scratchUnlocked = false;
-let scratchedMoves = 0;
+const scratchCtx =
+  scratchCanvas.getContext("2d");
 
-function sizeScratchCanvas(){
-  const rect = scratchCanvas.parentElement.getBoundingClientRect();
+function sizeScratchCanvas() {
 
-  scratchCanvas.width = rect.width * window.devicePixelRatio;
-  scratchCanvas.height = rect.height * window.devicePixelRatio;
+  const rect =
+    scratchCanvas.getBoundingClientRect();
 
-  scratchCanvas.style.width = rect.width + "px";
-  scratchCanvas.style.height = rect.height + "px";
+  const ratio =
+    window.devicePixelRatio || 1;
+
+  scratchCanvas.width =
+    rect.width * ratio;
+
+  scratchCanvas.height =
+    rect.height * ratio;
 
   scratchCtx.setTransform(
-    window.devicePixelRatio,
+    ratio,
     0,
     0,
-    window.devicePixelRatio,
+    ratio,
     0,
     0
   );
 
-  drawScratchCover(rect.width, rect.height);
+  const gradient =
+    scratchCtx.createLinearGradient(
+      0,
+      0,
+      rect.width,
+      rect.height
+    );
+
+  gradient.addColorStop(0,"#b7b7b7");
+  gradient.addColorStop(.5,"#eeeeee");
+  gradient.addColorStop(1,"#969696");
+
+  scratchCtx.globalCompositeOperation =
+    "source-over";
+
+  scratchCtx.fillStyle =
+    gradient;
+
+  scratchCtx.fillRect(
+    0,
+    0,
+    rect.width,
+    rect.height
+  );
+
+  scratchCtx.fillStyle =
+    "#222";
+
+  scratchCtx.textAlign =
+    "center";
+
+  scratchCtx.font =
+    "900 28px Arial";
+
+  scratchCtx.fillText(
+    "SCRATCH ME",
+    rect.width / 2,
+    rect.height / 2
+  );
+
+  scratchCtx.font =
+    "700 16px Arial";
+
+  scratchCtx.fillText(
+    "YOUR GAME IS UNDER HERE",
+    rect.width / 2,
+    rect.height / 2 + 35
+  );
+
 }
 
-function drawScratchCover(w,h){
-  scratchCtx.globalCompositeOperation = "source-over";
+sizeScratchCanvas();
 
-  const grad = scratchCtx.createLinearGradient(0,0,w,h);
-  grad.addColorStop(0,"#b9bec8");
-  grad.addColorStop(.25,"#f1f4f7");
-  grad.addColorStop(.48,"#878d98");
-  grad.addColorStop(.7,"#f4f5f6");
-  grad.addColorStop(1,"#a1a6af");
+let scratching = false;
+let hasScratched = false;
 
-  scratchCtx.fillStyle = grad;
-  scratchCtx.fillRect(0,0,w,h);
+function scratch(x,y) {
 
-  scratchCtx.fillStyle = "#111";
-  scratchCtx.font = "900 24px Space Grotesk";
-  scratchCtx.textAlign = "center";
-  scratchCtx.fillText("SCRATCH TO REVEAL", w/2, h/2 - 4);
+  const rect =
+    scratchCanvas.getBoundingClientRect();
 
-  scratchCtx.font = "700 13px Karla";
-  scratchCtx.fillText("something has gone terribly right", w/2, h/2 + 26);
-}
+  const px =
+    x - rect.left;
 
-function scratchAt(x,y){
-  scratchCtx.globalCompositeOperation = "destination-out";
+  const py =
+    y - rect.top;
+
+  scratchCtx.globalCompositeOperation =
+    "destination-out";
+
   scratchCtx.beginPath();
-  scratchCtx.arc(x,y,30,0,Math.PI*2);
+
+  scratchCtx.arc(
+    px,
+    py,
+    32,
+    0,
+    Math.PI * 2
+  );
+
   scratchCtx.fill();
 
-  scratchedMoves++;
+  hasScratched = true;
 
-  if(scratchedMoves > 35 && !scratchUnlocked){
-    scratchUnlocked = true;
-    document.getElementById("revealContinue").classList.remove("hidden");
-  }
 }
 
-function getScratchPoint(e){
-  const rect = scratchCanvas.getBoundingClientRect();
+scratchCanvas.addEventListener(
+  "pointerdown",
+  e => {
 
-  if(e.touches && e.touches[0]){
-    return {
-      x:e.touches[0].clientX - rect.left,
-      y:e.touches[0].clientY - rect.top
-    };
-  }
+    scratching = true;
 
-  return {
-    x:e.clientX - rect.left,
-    y:e.clientY - rect.top
-  };
-}
-
-scratchCanvas.addEventListener("pointerdown",e=>{
-  scratching = true;
-  const p = getScratchPoint(e);
-  scratchAt(p.x,p.y);
-});
-
-scratchCanvas.addEventListener("pointermove",e=>{
-  if(!scratching) return;
-  const p = getScratchPoint(e);
-  scratchAt(p.x,p.y);
-});
-
-window.addEventListener("pointerup",()=>{
-  scratching = false;
-});
-
-window.addEventListener("resize",()=>{
-  if(!scratchUnlocked){
-    sizeScratchCanvas();
-  }
-});
-
-window.addEventListener("load",sizeScratchCanvas);
-
-function unlockGame(){
-  const gameSection = document.getElementById("gameSection");
-  gameSection.classList.remove("hidden");
-
-  setTimeout(()=>{
-    gameSection.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-    drawRopes();
-  },100);
-}
-
-
-/* =========================================================
-   TANGLED & DOOMED GAME
-========================================================= */
-
-const board = document.getElementById("gameBoard");
-const ropeSvg = document.getElementById("ropeSvg");
-const trappedObject = document.getElementById("trappedObject");
-const containerBin = document.getElementById("containerBin");
-
-const knots = [...document.querySelectorAll(".knot")];
-const docks = [...document.querySelectorAll(".dock")];
-
-let gameRunning = false;
-let timeLeft = 180;
-let timerInterval = null;
-
-let freedKnots = new Set();
-
-let dragging = null;
-let dragOffsetX = 0;
-let dragOffsetY = 0;
-
-let objectDragging = false;
-let objectOffsetX = 0;
-let objectOffsetY = 0;
-
-const ropeColors = {
-  1:"#ff3cac",
-  2:"#4de0ff",
-  3:"#ffe600",
-  4:"#39ff14",
-  5:"#ff6f1f",
-  6:"#a78bfa"
-};
-
-
-function startGame(){
-  resetPositions();
-
-  gameRunning = true;
-  timeLeft = 180;
-
-  document.getElementById("startOverlay").classList.add("hidden");
-  document.getElementById("resultOverlay").classList.add("hidden");
-
-  document.getElementById("gameStatus").textContent = "Currently Tangled";
-  document.getElementById("statusLine").textContent =
-    "Match each numbered knot to its numbered dock.";
-
-  updateTimer();
-
-  clearInterval(timerInterval);
-
-  timerInterval = setInterval(()=>{
-    timeLeft--;
-    updateTimer();
-
-    if(timeLeft <= 0){
-      endGame(false);
-    }
-  },1000);
-
-  drawRopes();
-}
-
-
-function updateTimer(){
-  const mins = Math.floor(timeLeft / 60);
-  const secs = timeLeft % 60;
-
-  const timer = document.getElementById("timer");
-
-  timer.textContent =
-    `${mins}:${secs.toString().padStart(2,"0")}`;
-
-  if(timeLeft <= 30){
-    timer.classList.add("timer-danger");
-  }else{
-    timer.classList.remove("timer-danger");
-  }
-}
-
-
-function resetPositions(){
-  freedKnots.clear();
-
-  document.getElementById("knotsDone").textContent = "0";
-
-  const positions = {
-    1:[42,40],
-    2:[58,38],
-    3:[36,57],
-    4:[62,58],
-    5:[47,66],
-    6:[53,27]
-  };
-
-  knots.forEach(knot=>{
-    const n = knot.dataset.knot;
-
-    knot.style.left = positions[n][0] + "%";
-    knot.style.top = positions[n][1] + "%";
-
-    knot.classList.remove("done");
-  });
-
-  trappedObject.style.left = "50%";
-  trappedObject.style.top = "50%";
-
-  trappedObject.classList.remove("free");
-
-  containerBin.classList.remove("ready");
-
-  document.getElementById("gameStatus").textContent = "Doom Pending";
-
-  drawRopes();
-}
-
-
-function resetGame(){
-  clearInterval(timerInterval);
-
-  gameRunning = false;
-
-  resetPositions();
-
-  timeLeft = 180;
-  updateTimer();
-
-  document.getElementById("timer").classList.remove("timer-danger");
-
-  document.getElementById("resultOverlay").classList.add("hidden");
-  document.getElementById("startOverlay").classList.remove("hidden");
-
-  document.getElementById("statusLine").textContent =
-    "Match the knots to their numbered docks.";
-}
-
-
-function getCenter(el){
-  const boardRect = board.getBoundingClientRect();
-  const elRect = el.getBoundingClientRect();
-
-  return {
-    x:elRect.left - boardRect.left + elRect.width/2,
-    y:elRect.top - boardRect.top + elRect.height/2
-  };
-}
-
-
-function drawRopes(){
-  ropeSvg.innerHTML = "";
-
-  const boardRect = board.getBoundingClientRect();
-
-  if(boardRect.width === 0) return;
-
-  const objectCenter = getCenter(trappedObject);
-
-  knots.forEach(knot=>{
-    const id = knot.dataset.knot;
-
-    if(freedKnots.has(id)) return;
-
-    const k = getCenter(knot);
-
-    const scaleX = 1000 / boardRect.width;
-    const scaleY = 625 / boardRect.height;
-
-    const x1 = k.x * scaleX;
-    const y1 = k.y * scaleY;
-
-    const x2 = objectCenter.x * scaleX;
-    const y2 = objectCenter.y * scaleY;
-
-    const bendX =
-      ((x1+x2)/2) +
-      (id % 2 === 0 ? 120 : -120);
-
-    const bendY =
-      ((y1+y2)/2) +
-      ((Number(id)-3) * 28);
-
-    const path = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path"
+    scratchCanvas.setPointerCapture(
+      e.pointerId
     );
 
-    path.setAttribute(
-      "d",
-      `M ${x1} ${y1}
-       Q ${bendX} ${bendY}
-       ${x2} ${y2}`
+    scratch(
+      e.clientX,
+      e.clientY
     );
 
-    path.setAttribute("fill","none");
-    path.setAttribute("stroke",ropeColors[id]);
-    path.setAttribute("stroke-width","12");
-    path.setAttribute("stroke-linecap","round");
-    path.setAttribute("opacity",".93");
+  }
+);
 
-    ropeSvg.appendChild(path);
-  });
-}
+scratchCanvas.addEventListener(
+  "pointermove",
+  e => {
 
+    if (!scratching) return;
 
-/* =========================================================
-   KNOT DRAGGING
-========================================================= */
+    scratch(
+      e.clientX,
+      e.clientY
+    );
 
-knots.forEach(knot=>{
+  }
+);
 
-  knot.addEventListener("pointerdown",e=>{
-    if(!gameRunning) return;
-    if(knot.classList.contains("done")) return;
+scratchCanvas.addEventListener(
+  "pointerup",
+  e => {
 
-    dragging = knot;
+    scratching = false;
 
-    knot.setPointerCapture(e.pointerId);
+    if (
+      scratchCanvas.hasPointerCapture(
+        e.pointerId
+      )
+    ) {
 
-    const boardRect = board.getBoundingClientRect();
-    const knotRect = knot.getBoundingClientRect();
+      scratchCanvas.releasePointerCapture(
+        e.pointerId
+      );
 
-    dragOffsetX =
-      e.clientX - (knotRect.left + knotRect.width/2);
-
-    dragOffsetY =
-      e.clientY - (knotRect.top + knotRect.height/2);
-
-    e.preventDefault();
-  });
-
-
-  knot.addEventListener("pointermove",e=>{
-    if(dragging !== knot || !gameRunning) return;
-
-    const rect = board.getBoundingClientRect();
-
-    let x =
-      e.clientX -
-      rect.left -
-      dragOffsetX;
-
-    let y =
-      e.clientY -
-      rect.top -
-      dragOffsetY;
-
-    x = Math.max(30,Math.min(rect.width - 30,x));
-    y = Math.max(30,Math.min(rect.height - 30,y));
-
-    knot.style.left = x + "px";
-    knot.style.top = y + "px";
-
-    drawRopes();
-  });
-
-
-  knot.addEventListener("pointerup",()=>{
-    if(dragging !== knot) return;
-
-    checkKnotDock(knot);
-
-    dragging = null;
-  });
-
-});
-
-
-function checkKnotDock(knot){
-  const id = knot.dataset.knot;
-
-  const dock =
-    document.querySelector(`.dock[data-dock="${id}"]`);
-
-  const a = getCenter(knot);
-  const b = getCenter(dock);
-
-  const distance =
-    Math.hypot(a.x-b.x,a.y-b.y);
-
-  if(distance < 65){
-
-    knot.style.left = dock.style.left;
-    knot.style.top = dock.style.top;
-
-    knot.classList.add("done");
-    dock.classList.add("active");
-
-    freedKnots.add(id);
-
-    document.getElementById("knotsDone").textContent =
-      freedKnots.size;
-
-    document.getElementById("statusLine").textContent =
-      `Knot ${id} freed. ${6-freedKnots.size} left.`;
-
-    drawRopes();
-
-    if(freedKnots.size === 6){
-      freeObject();
     }
 
-  }else{
-    document.getElementById("statusLine").textContent =
-      `Nope. Knot ${id} belongs in circle ${id}.`;
+    if (hasScratched) {
+
+      setTimeout(
+        () => {
+
+          scratchCanvas.style.display =
+            "none";
+
+        },
+        250
+      );
+
+    }
+
   }
-}
+);
 
 
-function freeObject(){
-  trappedObject.classList.add("free");
-  containerBin.classList.add("ready");
+/* =========================
+   OPEN GAME
+========================= */
 
-  document.getElementById("gameStatus").textContent =
-    "OBJECT FREE";
+document
+  .getElementById("openGameBtn")
+  .addEventListener(
+    "click",
+    () => {
 
-  document.getElementById("statusLine").textContent =
-    "IT'S FREE. Grab it and drag it into the bin!";
-}
+      scratchCanvas.style.display =
+        "none";
 
+      const game =
+        document.getElementById(
+          "game"
+        );
 
-/* =========================================================
-   OBJECT DRAGGING
-========================================================= */
+      game.style.display =
+        "flex";
 
-trappedObject.addEventListener("pointerdown",e=>{
-  if(!gameRunning) return;
-  if(!trappedObject.classList.contains("free")) return;
+      game.scrollIntoView({
+        behavior:"smooth"
+      });
 
-  objectDragging = true;
-
-  trappedObject.setPointerCapture(e.pointerId);
-
-  const rect = trappedObject.getBoundingClientRect();
-
-  objectOffsetX =
-    e.clientX - (rect.left + rect.width/2);
-
-  objectOffsetY =
-    e.clientY - (rect.top + rect.height/2);
-
-  e.preventDefault();
-});
+    }
+  );
 
 
-trappedObject.addEventListener("pointermove",e=>{
-  if(!objectDragging || !gameRunning) return;
+/* =========================
+   TANGLED & DOOMED
+========================= */
 
-  const rect = board.getBoundingClientRect();
+const svg =
+  document.getElementById(
+    "cordSvg"
+  );
 
-  let x =
-    e.clientX -
-    rect.left -
-    objectOffsetX;
+const linesLayer =
+  document.getElementById(
+    "linesLayer"
+  );
 
-  let y =
-    e.clientY -
-    rect.top -
-    objectOffsetY;
+const pointsLayer =
+  document.getElementById(
+    "pointsLayer"
+  );
 
-  x = Math.max(45,Math.min(rect.width - 45,x));
-  y = Math.max(45,Math.min(rect.height - 45,y));
+const timerDisplay =
+  document.getElementById(
+    "timer"
+  );
 
-  trappedObject.style.left = x + "px";
-  trappedObject.style.top = y + "px";
-});
+const movesDisplay =
+  document.getElementById(
+    "moves"
+  );
 
+const tangleCountDisplay =
+  document.getElementById(
+    "tangleCount"
+  );
 
-trappedObject.addEventListener("pointerup",()=>{
-  if(!objectDragging) return;
+const startGameBtn =
+  document.getElementById(
+    "startGameBtn"
+  );
 
-  objectDragging = false;
+const gameMessage =
+  document.getElementById(
+    "gameMessage"
+  );
 
-  checkObjectBin();
-});
-
-
-function checkObjectBin(){
-  const objectCenter = getCenter(trappedObject);
-  const binCenter = getCenter(containerBin);
-
-  const distance =
-    Math.hypot(
-      objectCenter.x-binCenter.x,
-      objectCenter.y-binCenter.y
-    );
-
-  if(distance < 105){
-    endGame(true);
-  }else{
-    document.getElementById("statusLine").textContent =
-      "So close. The freed object still has to make it into the bin.";
-  }
-}
-
-
-/* =========================================================
-   WIN / LOSE
-========================================================= */
-
-function endGame(win){
-  clearInterval(timerInterval);
-
-  gameRunning = false;
-
-  const overlay = document.getElementById("resultOverlay");
-  const title = document.getElementById("resultTitle");
-  const copy = document.getElementById("resultCopy");
-
-  overlay.classList.remove("hidden");
-
-  if(win){
-
-    title.textContent = "YOU UNTANGLED THE DOOM.";
-
-    copy.textContent =
-      `You freed the object with ${formatTime(timeLeft)} still on the clock. Against several pieces of digital string, you prevailed.`;
-
-    document.getElementById("gameStatus").textContent =
-      "SURVIVED";
-
-  }else{
-
-    title.textContent = "THE TANGLE WON.";
-
-    copy.textContent =
-      "Three minutes are up. The object now belongs to the rope. We assume they are very happy together.";
-
-    document.getElementById("gameStatus").textContent =
-      "DOOMED";
-  }
-}
+const resultBox =
+  document.getElementById(
+    "resultBox"
+  );
 
 
-function formatTime(seconds){
-  const m = Math.floor(seconds/60);
-  const s = seconds%60;
-
-  return `${m}:${s.toString().padStart(2,"0")}`;
-}
-
-
-function goToFeedback(){
-  const section =
-    document.getElementById("feedbackSection");
-
-  section.classList.remove("hidden");
-
-  setTimeout(()=>{
-    section.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-  },100);
-}
-
-
-/* =========================================================
-   FEEDBACK
-========================================================= */
-
-const feedbackFields = [
-  "funFeedback",
-  "confusingFeedback",
-  "difficultyFeedback",
-  "changeFeedback"
+const cordColors = [
+  "#ff3ca6",
+  "#34d9ff",
+  "#ffe600",
+  "#824cff",
+  "#ff6f1f",
+  "#39ff14"
 ];
 
 
-function saveFeedback(){
-  const data = {};
+let cords = [];
 
-  feedbackFields.forEach(id=>{
-    data[id] =
-      document.getElementById(id).value;
-  });
+let gameRunning =
+  false;
 
-  localStorage.setItem(
-    "fawylTanyaFeedback",
-    JSON.stringify(data)
+let timeLeft =
+  60;
+
+let moves =
+  0;
+
+let timerInterval =
+  null;
+
+let dragging =
+  null;
+
+let dragMoved =
+  false;
+
+let previousTangles =
+  0;
+
+let tanglesCreated =
+  0;
+
+
+/* STARTING LAYOUT */
+
+function makeStartingCords() {
+
+  const leftY = [
+    80,
+    135,
+    190,
+    245,
+    300,
+    355
+  ];
+
+  const rightY = [
+    355,
+    300,
+    245,
+    190,
+    135,
+    80
+  ];
+
+  cords =
+    leftY.map(
+      (y,index) => ({
+
+        id:index,
+
+        color:
+          cordColors[index],
+
+        a:{
+          x:90,
+          y:y
+        },
+
+        b:{
+          x:610,
+          y:rightY[index]
+        }
+
+      })
+    );
+
+}
+
+
+/* RENDER */
+
+function renderCords() {
+
+  linesLayer.innerHTML =
+    "";
+
+  pointsLayer.innerHTML =
+    "";
+
+  cords.forEach(
+    cord => {
+
+      const line =
+        document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line"
+        );
+
+      line.setAttribute(
+        "x1",
+        cord.a.x
+      );
+
+      line.setAttribute(
+        "y1",
+        cord.a.y
+      );
+
+      line.setAttribute(
+        "x2",
+        cord.b.x
+      );
+
+      line.setAttribute(
+        "y2",
+        cord.b.y
+      );
+
+      line.setAttribute(
+        "stroke",
+        cord.color
+      );
+
+      line.setAttribute(
+        "data-cord",
+        cord.id
+      );
+
+      line.classList.add(
+        "cord-line"
+      );
+
+      linesLayer.appendChild(
+        line
+      );
+
+
+      createEndpoint(
+        cord,
+        "a"
+      );
+
+      createEndpoint(
+        cord,
+        "b"
+      );
+
+    }
   );
 
-  const saved =
-    document.getElementById("feedbackSaved");
 
-  saved.classList.remove("hidden");
+  updateTangles();
 
-  setTimeout(()=>{
-    saved.classList.add("hidden");
-  },3500);
 }
 
 
-function loadFeedback(){
-  const stored =
-    localStorage.getItem("fawylTanyaFeedback");
+function createEndpoint(
+  cord,
+  side
+) {
 
-  if(!stored) return;
+  const point =
+    cord[side];
 
-  try{
-    const data = JSON.parse(stored);
+  const group =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "g"
+    );
 
-    feedbackFields.forEach(id=>{
-      if(data[id]){
-        document.getElementById(id).value =
-          data[id];
+  group.setAttribute(
+    "data-cord",
+    cord.id
+  );
+
+  group.setAttribute(
+    "data-side",
+    side
+  );
+
+
+  const circle =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle"
+    );
+
+  circle.setAttribute(
+    "cx",
+    point.x
+  );
+
+  circle.setAttribute(
+    "cy",
+    point.y
+  );
+
+  circle.setAttribute(
+    "r",
+    22
+  );
+
+  circle.setAttribute(
+    "fill",
+    cord.color
+  );
+
+  circle.classList.add(
+    "endpoint"
+  );
+
+
+  const ring =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle"
+    );
+
+  ring.setAttribute(
+    "cx",
+    point.x
+  );
+
+  ring.setAttribute(
+    "cy",
+    point.y
+  );
+
+  ring.setAttribute(
+    "r",
+    11
+  );
+
+  ring.classList.add(
+    "endpoint-ring"
+  );
+
+
+  group.appendChild(
+    circle
+  );
+
+  group.appendChild(
+    ring
+  );
+
+  pointsLayer.appendChild(
+    group
+  );
+
+
+  circle.addEventListener(
+    "pointerdown",
+    e => {
+
+      if (!gameRunning) return;
+
+      e.preventDefault();
+
+      dragging = {
+        cordId:
+          cord.id,
+
+        side:
+          side,
+
+        pointerId:
+          e.pointerId
+      };
+
+      dragMoved =
+        false;
+
+      circle.setPointerCapture(
+        e.pointerId
+      );
+
+    }
+  );
+
+
+  circle.addEventListener(
+    "pointermove",
+    e => {
+
+      if (
+        !gameRunning ||
+        !dragging ||
+        dragging.pointerId !==
+        e.pointerId
+      ) {
+        return;
       }
-    });
 
-  }catch(err){
-    console.log("Could not load feedback.");
+      const p =
+        pointerToSvg(
+          e.clientX,
+          e.clientY
+        );
+
+      const targetCord =
+        cords[
+          dragging.cordId
+        ];
+
+      targetCord[
+        dragging.side
+      ].x =
+        clamp(
+          p.x,
+          35,
+          665
+        );
+
+      targetCord[
+        dragging.side
+      ].y =
+        clamp(
+          p.y,
+          55,
+          415
+        );
+
+      dragMoved =
+        true;
+
+      updateLivePositions();
+
+      updateTangles();
+
+    }
+  );
+
+
+  circle.addEventListener(
+    "pointerup",
+    e => {
+
+      if (
+        !dragging ||
+        dragging.pointerId !==
+        e.pointerId
+      ) {
+        return;
+      }
+
+      if (
+        circle.hasPointerCapture(
+          e.pointerId
+        )
+      ) {
+
+        circle.releasePointerCapture(
+          e.pointerId
+        );
+
+      }
+
+      dragging =
+        null;
+
+      if (dragMoved) {
+
+        moves++;
+
+        movesDisplay.textContent =
+          moves;
+
+        const newCount =
+          countIntersections();
+
+        if (
+          newCount >
+          previousTangles
+        ) {
+
+          tanglesCreated +=
+            newCount -
+            previousTangles;
+
+          gameMessage.textContent =
+            "Amazing. You created a new problem while fixing the old problem. Extremely authentic.";
+
+        } else if (
+          newCount <
+          previousTangles
+        ) {
+
+          gameMessage.textContent =
+            "Okay wait. That actually helped.";
+
+        } else {
+
+          gameMessage.textContent =
+            "The cords have acknowledged your effort and changed absolutely nothing.";
+
+        }
+
+        previousTangles =
+          newCount;
+
+        updateTangles();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* UPDATE WITHOUT REBUILDING */
+
+function updateLivePositions() {
+
+  cords.forEach(
+    cord => {
+
+      const line =
+        linesLayer.querySelector(
+          `[data-cord="${cord.id}"]`
+        );
+
+      if (line) {
+
+        line.setAttribute(
+          "x1",
+          cord.a.x
+        );
+
+        line.setAttribute(
+          "y1",
+          cord.a.y
+        );
+
+        line.setAttribute(
+          "x2",
+          cord.b.x
+        );
+
+        line.setAttribute(
+          "y2",
+          cord.b.y
+        );
+
+      }
+
+
+      ["a","b"].forEach(
+        side => {
+
+          const group =
+            pointsLayer.querySelector(
+              `[data-cord="${cord.id}"][data-side="${side}"]`
+            );
+
+          if (!group) return;
+
+          const circles =
+            group.querySelectorAll(
+              "circle"
+            );
+
+          circles.forEach(
+            circle => {
+
+              circle.setAttribute(
+                "cx",
+                cord[side].x
+              );
+
+              circle.setAttribute(
+                "cy",
+                cord[side].y
+              );
+
+            }
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* POINTER COORDS */
+
+function pointerToSvg(
+  clientX,
+  clientY
+) {
+
+  const rect =
+    svg.getBoundingClientRect();
+
+  return {
+
+    x:
+      (
+        clientX -
+        rect.left
+      ) *
+      (
+        700 /
+        rect.width
+      ),
+
+    y:
+      (
+        clientY -
+        rect.top
+      ) *
+      (
+        450 /
+        rect.height
+      )
+
+  };
+
+}
+
+
+/* INTERSECTION MATH */
+
+function orientation(
+  p,
+  q,
+  r
+) {
+
+  const val =
+    (
+      q.y -
+      p.y
+    ) *
+    (
+      r.x -
+      q.x
+    ) -
+    (
+      q.x -
+      p.x
+    ) *
+    (
+      r.y -
+      q.y
+    );
+
+  if (
+    Math.abs(val) <
+    0.00001
+  ) {
+    return 0;
   }
+
+  return (
+    val > 0
+      ? 1
+      : 2
+  );
+
 }
 
 
-function showCollectorCard(){
-  saveFeedback();
+function segmentsIntersect(
+  p1,
+  q1,
+  p2,
+  q2
+) {
 
-  const section =
-    document.getElementById("collectorSection");
+  const o1 =
+    orientation(
+      p1,
+      q1,
+      p2
+    );
 
-  section.classList.remove("hidden");
+  const o2 =
+    orientation(
+      p1,
+      q1,
+      q2
+    );
 
-  setTimeout(()=>{
-    section.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-  },100);
+  const o3 =
+    orientation(
+      p2,
+      q2,
+      p1
+    );
+
+  const o4 =
+    orientation(
+      p2,
+      q2,
+      q1
+    );
+
+  return (
+    o1 !== o2 &&
+    o3 !== o4
+  );
+
 }
 
-loadFeedback();
+
+function getIntersectionData() {
+
+  let count =
+    0;
+
+  const tangledCordIds =
+    new Set();
 
 
-/* =========================================================
-   COLLECTOR CARD
-========================================================= */
+  for (
+    let i = 0;
+    i < cords.length;
+    i++
+  ) {
 
-document
-  .getElementById("collectorCard")
-  .addEventListener("click",function(){
-    this.classList.toggle("flipped");
+    for (
+      let j = i + 1;
+      j < cords.length;
+      j++
+    ) {
+
+      if (
+        segmentsIntersect(
+          cords[i].a,
+          cords[i].b,
+          cords[j].a,
+          cords[j].b
+        )
+      ) {
+
+        count++;
+
+        tangledCordIds.add(
+          cords[i].id
+        );
+
+        tangledCordIds.add(
+          cords[j].id
+        );
+
+      }
+
+    }
+
+  }
+
+
+  return {
+    count,
+    tangledCordIds
+  };
+
+}
+
+
+function countIntersections() {
+
+  return (
+    getIntersectionData()
+      .count
+  );
+
+}
+
+
+/* UPDATE COLORS */
+
+function updateTangles() {
+
+  const data =
+    getIntersectionData();
+
+  tangleCountDisplay.textContent =
+    data.count;
+
+
+  cords.forEach(
+    cord => {
+
+      const line =
+        linesLayer.querySelector(
+          `[data-cord="${cord.id}"]`
+        );
+
+      if (!line) return;
+
+      line.classList.remove(
+        "clean",
+        "tangled"
+      );
+
+      if (
+        data.tangledCordIds.has(
+          cord.id
+        )
+      ) {
+
+        line.classList.add(
+          "tangled"
+        );
+
+      } else {
+
+        line.classList.add(
+          "clean"
+        );
+
+      }
+
+    }
+  );
+
+
+  if (
+    gameRunning &&
+    data.count === 0
+  ) {
+
+    finishGame(true);
+
+  }
+
+}
+
+
+/* START */
+
+startGameBtn.addEventListener(
+  "click",
+  () => {
+
+    if (gameRunning) return;
+
+    makeStartingCords();
+
+    gameRunning =
+      true;
+
+    timeLeft =
+      60;
+
+    moves =
+      0;
+
+    tanglesCreated =
+      0;
+
+    movesDisplay.textContent =
+      "0";
+
+    timerDisplay.textContent =
+      "60";
+
+    resultBox.style.display =
+      "none";
+
+    startGameBtn.disabled =
+      true;
+
+    startGameBtn.textContent =
+      "CORD DRAWER OPEN";
+
+    renderCords();
+
+    previousTangles =
+      countIntersections();
+
+    gameMessage.textContent =
+      "Go. Drag the colored ends until every cord turns green.";
+
+    timerInterval =
+      setInterval(
+        () => {
+
+          timeLeft--;
+
+          timerDisplay.textContent =
+            timeLeft;
+
+          if (
+            timeLeft <= 0
+          ) {
+
+            finishGame(false);
+
+          }
+
+        },
+        1000
+      );
+
+  }
+);
+
+
+/* FINISH */
+
+function finishGame(success) {
+
+  if (!gameRunning) return;
+
+  gameRunning =
+    false;
+
+  clearInterval(
+    timerInterval
+  );
+
+  const data =
+    getIntersectionData();
+
+  const tangledIds =
+    data.tangledCordIds;
+
+  const clearCords =
+    cords.length -
+    tangledIds.size;
+
+
+  document
+    .getElementById(
+      "resultCords"
+    )
+    .textContent =
+    `${clearCords} / 6`;
+
+
+  document
+    .getElementById(
+      "resultCreated"
+    )
+    .textContent =
+    tanglesCreated;
+
+
+  document
+    .getElementById(
+      "resultTime"
+    )
+    .textContent =
+    Math.max(
+      0,
+      timeLeft
+    );
+
+
+  const title =
+    document.getElementById(
+      "resultTitle"
+    );
+
+  const verdict =
+    document.getElementById(
+      "verdict"
+    );
+
+
+  if (success) {
+
+    title.textContent =
+      "UNTANGLED.";
+
+    if (
+      tanglesCreated === 0
+    ) {
+
+      verdict.textContent =
+        "FINAL VERDICT: SUSPICIOUSLY COMPETENT. THE DRAWER FEARS YOU.";
+
+    } else if (
+      tanglesCreated <= 5
+    ) {
+
+      verdict.textContent =
+        "FINAL VERDICT: YOU DEFEATED THE DRAWER WHERE CHARGERS GO TO DIE.";
+
+    } else {
+
+      verdict.textContent =
+        "FINAL VERDICT: YOU MADE IT WORSE SEVERAL TIMES AND STILL ESCAPED.";
+
+    }
+
+    gameMessage.textContent =
+      "Every cord is clear. This has never happened in a real junk drawer.";
+
+  } else {
+
+    title.textContent =
+      "TIME'S UP.";
+
+    verdict.textContent =
+      "FINAL VERDICT: THE CORDS LIVE HERE NOW.";
+
+    gameMessage.textContent =
+      "The drawer has reclaimed its property.";
+
+  }
+
+
+  resultBox.style.display =
+    "block";
+
+
+  resultBox.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
   });
 
+}
 
-/* redraw strings if screen changes */
-window.addEventListener("resize",()=>{
-  if(!document
-      .getElementById("gameSection")
-      .classList.contains("hidden")){
-    drawRopes();
-  }
-});
+
+/* UTILITY */
+
+function clamp(
+  value,
+  min,
+  max
+) {
+
+  return Math.max(
+    min,
+    Math.min(
+      max,
+      value
+    )
+  );
+
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+document
+  .getElementById(
+    "feedbackBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const feedback =
+        document.getElementById(
+          "feedback"
+        );
+
+      feedback.style.display =
+        "flex";
+
+      feedback.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "submitFeedback"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const feedbackData = {
+
+        tester:
+          "Tanya",
+
+        game:
+          "Tangled & Doomed",
+
+        moves:
+          moves,
+
+        tanglesCreated:
+          tanglesCreated,
+
+        fun:
+          document.getElementById(
+            "funRating"
+          ).value,
+
+        rules:
+          document.getElementById(
+            "rulesRating"
+          ).value,
+
+        difficulty:
+          document.getElementById(
+            "difficultyRating"
+          ).value,
+
+        playAgain:
+          document.getElementById(
+            "playAgain"
+          ).value,
+
+        confused:
+          document.getElementById(
+            "confused"
+          ).value,
+
+        favorite:
+          document.getElementById(
+            "favorite"
+          ).value,
+
+        change:
+          document.getElementById(
+            "change"
+          ).value,
+
+        broken:
+          document.getElementById(
+            "broken"
+          ).value
+
+      };
+
+
+      localStorage.setItem(
+        "fawylTanyaFeedback",
+        JSON.stringify(
+          feedbackData
+        )
+      );
+
+
+      const collector =
+        document.getElementById(
+          "collector"
+        );
+
+      collector.style.display =
+        "flex";
+
+      collector.scrollIntoView({
+        behavior:"smooth"
+      });
+
+    }
+  );
+
+
+/* =========================
+   COLLECTOR CARD
+========================= */
+
+document
+  .getElementById(
+    "collectorCard"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      this.classList.toggle(
+        "flipped"
+      );
+
+    }
+  );
+
 </script>
 
 </body>
