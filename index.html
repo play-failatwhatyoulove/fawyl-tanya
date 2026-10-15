@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tanya | FAWYL Original Tester</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --pink:#ff3cac;
+  --blue:#4de0ff;
+  --yellow:#ffe600;
+  --green:#39ff14;
+  --orange:#ff6f1f;
+  --purple:#8d5cff;
+  --cream:#fff8df;
+  --ink:#101014;
+  --muted:#c9c3da;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Karla",sans-serif;
+  color:white;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,60,172,.18), transparent 30%),
+    radial-gradient(circle at 90% 15%, rgba(77,224,255,.14), transparent 32%),
+    radial-gradient(circle at 50% 80%, rgba(141,92,255,.16), transparent 35%),
+    #09090d;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+
+a{
+  color:inherit;
+}
+
+button,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.page{
+  width:min(1100px, calc(100% - 28px));
+  margin:0 auto;
+  padding:26px 0 80px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  margin-bottom:26px;
+}
+
+.logo{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:clamp(1.4rem,4vw,2rem);
+  font-weight:700;
+  letter-spacing:-.05em;
+}
+
+.logo span:nth-child(1){color:var(--pink);}
+.logo span:nth-child(2){color:var(--yellow);}
+.logo span:nth-child(3){color:var(--blue);}
+.logo span:nth-child(4){color:var(--green);}
+
+.card-count{
+  padding:8px 13px;
+  border:2px solid white;
+  border-radius:999px;
+  font-weight:800;
+  font-size:.84rem;
+  background:#111116;
+  box-shadow:4px 4px 0 var(--pink);
+}
+
+.panel{
+  position:relative;
+  background:rgba(17,17,23,.92);
+  border:2px solid var(--cream);
+  border-radius:24px;
+  padding:clamp(22px,5vw,42px);
+  margin:20px 0;
+  box-shadow:
+    10px 10px 0 rgba(255,60,172,.38),
+    0 18px 60px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.panel::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:var(--blue);
+  filter:blur(90px);
+  opacity:.06;
+  top:-60px;
+  right:-60px;
+  pointer-events:none;
+}
+
+.eyebrow{
+  display:inline-block;
+  margin-bottom:10px;
+  color:var(--yellow);
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.75rem;
+  font-weight:800;
+}
+
+h1,h2,h3{
+  font-family:"Space Grotesk",sans-serif;
+  margin-top:0;
+}
+
+h1{
+  font-size:clamp(2.5rem,8vw,5.4rem);
+  line-height:.9;
+  letter-spacing:-.07em;
+  margin-bottom:20px;
+}
+
+h2{
+  font-size:clamp(1.8rem,5vw,3rem);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+p{
+  font-size:1.04rem;
+  line-height:1.58;
+}
+
+.big-copy{
+  max-width:720px;
+  color:#eeeaf6;
+  font-size:1.12rem;
+}
+
+.tanya{
+  color:var(--pink);
+  text-shadow:3px 3px 0 rgba(77,224,255,.35);
+}
+
+.merch-note{
+  margin:28px 0;
+  padding:16px 18px;
+  border:2px dashed var(--yellow);
+  border-radius:16px;
+  background:rgba(255,230,0,.07);
+}
+
+.merch-note strong{
+  color:var(--yellow);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:2px solid #111;
+  border-radius:13px;
+  padding:13px 20px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  text-decoration:none;
+  background:var(--yellow);
+  color:#111;
+  box-shadow:5px 5px 0 var(--pink);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.btn:hover{
+  transform:translate(2px,2px);
+  box-shadow:3px 3px 0 var(--pink);
+}
+
+.btn.alt{
+  background:var(--blue);
+  box-shadow:5px 5px 0 var(--purple);
+}
+
+.btn.pink{
+  background:var(--pink);
+  color:white;
+  box-shadow:5px 5px 0 var(--blue);
+}
+
+.btn.dark{
+  background:#16161d;
+  color:white;
+  border-color:white;
+  box-shadow:5px 5px 0 var(--green);
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* SCRATCH CARD */
+
+.scratch-wrap{
+  max-width:720px;
+  margin:26px auto 0;
+}
+
+.scratch-card{
+  position:relative;
+  min-height:320px;
+  border-radius:24px;
+  overflow:hidden;
+  border:3px solid white;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.25), transparent 20%),
+    linear-gradient(135deg,#7e35ff,#ff3cac 45%,#4de0ff);
+  box-shadow:0 22px 70px rgba(0,0,0,.38);
+}
+
+.reveal-under{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  text-align:center;
+}
+
+.reveal-under small{
+  font-weight:900;
+  letter-spacing:.18em;
+  color:var(--yellow);
+}
+
+.reveal-under h3{
+  font-size:clamp(2.3rem,7vw,4.5rem);
+  margin:10px 0;
+  line-height:.9;
+}
+
+.reveal-under p{
+  max-width:500px;
+  margin:0;
+}
+
+#scratchCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  touch-action:none;
+}
+
+.scratch-help{
+  text-align:center;
+  color:var(--muted);
+  margin-top:13px;
+  font-size:.9rem;
+}
+
+/* GAME INFO */
+
+.rules-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:24px 0;
+}
+
+.rule{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;
+  padding:15px;
+  background:#0d0d12;
+}
+
+.rule b{
+  display:block;
+  color:var(--blue);
+  margin-bottom:5px;
+}
+
+.rule:nth-child(2) b{color:var(--yellow);}
+.rule:nth-child(3) b{color:var(--pink);}
+.rule:nth-child(4) b{color:var(--green);}
+
+.game-shell{
+  margin-top:24px;
+  padding:18px;
+  border:3px solid white;
+  border-radius:24px;
+  background:#08080c;
+}
+
+.game-hud{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+
+.hud-box{
+  flex:1;
+  min-width:135px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#15151c;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.hud-label{
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:#aaa6b7;
+  font-weight:800;
+}
+
+.hud-value{
+  margin-top:3px;
+  font-family:"Space Grotesk",sans-serif;
+  font-weight:700;
+  font-size:1.35rem;
+}
+
+.timer-danger{
+  color:#ff5a5a !important;
+  animation:pulse .65s infinite alternate;
+}
+
+@keyframes pulse{
+  to{
+    transform:scale(1.04);
+    text-shadow:0 0 15px currentColor;
+  }
+}
+
+#gameBoard{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/10;
+  min-height:430px;
+  border-radius:20px;
+  overflow:hidden;
+  touch-action:none;
+  user-select:none;
+  background:
+    radial-gradient(circle at center, rgba(255,60,172,.13), transparent 34%),
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    #101017;
+  background-size:auto, 28px 28px, 28px 28px, auto;
+}
+
+#ropeSvg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+}
+
+.dock{
+  position:absolute;
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  border:3px dashed rgba(255,255,255,.5);
+  display:grid;
+  place-items:center;
+  font-family:"Space Grotesk";
+  font-weight:800;
+  color:rgba(255,255,255,.6);
+  z-index:2;
+  transform:translate(-50%,-50%);
+}
+
+.dock.active{
+  border-color:var(--green);
+  color:var(--green);
+  background:rgba(57,255,20,.1);
+  box-shadow:0 0 28px rgba(57,255,20,.18);
+}
+
+.knot{
+  position:absolute;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  font-family:"Space Grotesk";
+  font-weight:900;
+  color:#111;
+  z-index:5;
+  cursor:grab;
+  border:3px solid #111;
+  box-shadow:0 6px 0 rgba(0,0,0,.45);
+  touch-action:none;
+}
+
+.knot:active{
+  cursor:grabbing;
+  transform:translate(-50%,-50%) scale(1.08);
+}
+
+.knot.done{
+  opacity:.2;
+  pointer-events:none;
+  transform:translate(-50%,-50%) scale(.65);
+}
+
+.object{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:94px;
+  height:94px;
+  border-radius:24px;
+  transform:translate(-50%,-50%) rotate(-7deg);
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:8px;
+  z-index:4;
+  background:linear-gradient(145deg,#ffe600,#ff8b00);
+  color:#111;
+  border:4px solid #111;
+  font-family:"Space Grotesk";
+  font-weight:900;
+  line-height:1;
+  box-shadow:
+    0 9px 0 #000,
+    0 0 35px rgba(255,230,0,.25);
+  pointer-events:none;
+  transition:all .25s ease;
+}
+
+.object.free{
+  pointer-events:auto;
+  cursor:grab;
+  animation:objectFree .6s ease both;
+}
+
+@keyframes objectFree{
+  0%{transform:translate(-50%,-50%) rotate(-7deg) scale(.7);}
+  55%{transform:translate(-50%,-50%) rotate(8deg) scale(1.18);}
+  100%{transform:translate(-50%,-50%) rotate(0deg) scale(1);}
+}
+
+.container-bin{
+  position:absolute;
+  right:5%;
+  bottom:6%;
+  width:128px;
+  height:95px;
+  border:4px dashed var(--blue);
+  border-radius:16px 16px 28px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px;
+  color:var(--blue);
+  font-weight:900;
+  z-index:3;
+  background:rgba(77,224,255,.07);
+}
+
+.container-bin.ready{
+  animation:binGlow .7s infinite alternate;
+}
+
+@keyframes binGlow{
+  to{
+    box-shadow:0 0 30px rgba(77,224,255,.38);
+    background:rgba(77,224,255,.14);
+  }
+}
+
+.game-overlay{
+  position:absolute;
+  inset:0;
+  z-index:30;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  background:rgba(5,5,8,.89);
+  backdrop-filter:blur(4px);
+}
+
+.game-overlay h3{
+  font-size:clamp(2rem,6vw,4rem);
+  margin-bottom:8px;
+}
+
+.game-overlay p{
+  max-width:600px;
+  color:#dcd7e8;
+}
+
+.status-line{
+  margin:15px 0 4px;
+  min-height:27px;
+  font-weight:800;
+  color:var(--yellow);
+  text-align:center;
+}
+
+.controls-row{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+/* FEEDBACK */
+
+.feedback-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.field label{
+  display:block;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:vertical;
+  background:#0d0d12;
+  color:white;
+  border:2px solid #373743;
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+}
+
+textarea:focus{
+  border-color:var(--blue);
+}
+
+.feedback-saved{
+  margin-top:13px;
+  color:var(--green);
+  font-weight:800;
+}
+
+/* COLLECTOR CARD */
+
+.collector-stage{
+  perspective:1300px;
+  display:grid;
+  place-items:center;
+  padding:26px 0 12px;
+}
+
+.collector-card{
+  width:min(360px,88vw);
+  aspect-ratio:2.5/3.5;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .75s cubic-bezier(.2,.8,.2,1);
+  cursor:pointer;
+}
+
+.collector-card.flipped{
+  transform:rotateY(180deg);
+}
+
+.collector-face{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:26px;
+  border:3px solid rgba(255,255,255,.88);
+  overflow:hidden;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.5),
+    inset 0 0 35px rgba(255,255,255,.17);
+}
+
+.collector-front{
+  color:#111;
+  background:
+    linear-gradient(115deg,
+      #fdfdfd 0%,
+      #8ffcff 13%,
+      #fff 25%,
+      #ffa4e3 38%,
+      #ffe66a 52%,
+      #9f8cff 68%,
+      #9bffcf 82%,
+      #fff 100%);
+}
+
+.collector-front::before{
+  content:"";
+  position:absolute;
+  inset:-60%;
+  background:linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(255,255,255,.7) 48%,
+    transparent 58%
+  );
+  transform:rotate(15deg);
+  animation:holo 5s linear infinite;
+}
+
+@keyframes holo{
+  from{translate:-35% 0;}
+  to{translate:35% 0;}
+}
+
+.card-inner{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:25px;
+}
+
+.card-number{
+  align-self:flex-end;
+  border:2px solid #111;
+  border-radius:999px;
+  padding:5px 9px;
+  font-weight:900;
+  background:rgba(255,255,255,.55);
+}
+
+.card-title{
+  margin:auto 0 8px;
+  font-size:2.8rem;
+  line-height:.86;
+  letter-spacing:-.07em;
+}
+
+.card-game{
+  font-family:"Space Grotesk";
+  font-weight:900;
+  font-size:1.2rem;
+}
+
+.card-label{
+  margin-top:11px;
+  font-size:.72rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.collector-back{
+  transform:rotateY(180deg);
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,60,172,.32),transparent 28%),
+    radial-gradient(circle at 80% 85%,rgba(77,224,255,.25),transparent 30%),
+    #09090d;
+  padding:28px;
+}
+
+.back-logo{
+  font-size:2rem;
+  color:var(--yellow);
+}
+
+.collector-back p{
+  color:#dad5e6;
+}
+
+.mini-stamp{
+  margin-top:auto;
+  border:2px solid var(--pink);
+  border-radius:14px;
+  padding:10px;
+  text-align:center;
+  color:var(--pink);
+  font-weight:900;
+  transform:rotate(-3deg);
+}
+
+footer{
+  text-align:center;
+  color:#777384;
+  padding:40px 12px 0;
+  font-size:.85rem;
+}
+
+@media(max-width:760px){
+  .rules-grid,
+  .feedback-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  #gameBoard{
+    min-height:520px;
+    aspect-ratio:auto;
+  }
+
+  .dock{
+    width:64px;
+    height:64px;
+  }
+
+  .knot{
+    width:52px;
+    height:52px;
+  }
+}
+
+@media(max-width:520px){
+  .page{
+    width:min(100% - 18px,1100px);
+  }
+
+  .panel{
+    border-radius:18px;
+    padding:20px 16px;
+  }
+
+  .rules-grid,
+  .feedback-grid{
+    grid-template-columns:1fr;
+  }
+
+  .game-shell{
+    padding:10px;
+  }
+
+  #gameBoard{
+    min-height:560px;
+  }
+
+  .container-bin{
+    width:105px;
+    height:80px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+  <div class="topbar">
+    <div class="logo">
+      <span>F</span><span>A</span><span>W</span><span>YL</span>
+    </div>
+    <div class="card-count">ORIGINAL TESTER • 07/09</div>
+  </div>
+
+  <!-- WELCOME -->
+  <section class="panel" id="welcome">
+    <span class="eyebrow">Private Tester Transmission</span>
+    <h1>HEY,<br><span class="tanya">TANYA.</span></h1>
+
+    <p class="big-copy">
+      Your next FAWYL test is ready. This one looks simple right up until
+      your fingers and the universe decide they have separate plans.
+    </p>
+
+    <div class="merch-note">
+      <strong>Also:</strong> your tester merch is on the way — hoodie, shirt,
+      plus two bonus gifts because apparently we enjoy mailing you things.
+    </div>
+
+    <a href="#reveal" class="btn">Reveal Today’s Game ↓</a>
+  </section>
+
+
+  <!-- SCRATCH REVEAL -->
+  <section class="panel" id="reveal">
+    <span class="eyebrow">Game Reveal</span>
+    <h2>Scratch it.</h2>
+    <p>No dignity required. Mouse, finger, whatever you’ve got.</p>
+
+    <div class="scratch-wrap">
+      <div class="scratch-card">
+        <div class="reveal-under">
+          <small>ROUND 3</small>
+          <h3>TANGLED<br>& DOOMED</h3>
+          <p>
+            One hand. One trapped object. An unreasonable amount of rope.
+          </p>
+        </div>
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+
+      <div class="scratch-help">
+        Scratch away enough of the cover to unlock the game.
+      </div>
+    </div>
+
+    <div id="revealContinue" class="controls-row hidden">
+      <button class="btn pink" onclick="unlockGame()">Fine. Let Me Suffer.</button>
+    </div>
+  </section>
+
+
+  <!-- GAME -->
+  <section class="panel hidden" id="gameSection">
+    <span class="eyebrow">Today’s Test</span>
+    <h2>Tangled & Doomed</h2>
+
+    <p class="big-copy">
+      The object is trapped inside the mess. Untangle the ropes using one
+      pointer, free the object, then get it into the container before time runs out.
+    </p>
+
+    <div class="rules-grid">
+      <div class="rule">
+        <b>GOAL</b>
+        Free the trapped object.
+      </div>
+
+      <div class="rule">
+        <b>TIME</b>
+        180 seconds.
+      </div>
+
+      <div class="rule">
+        <b>RULE</b>
+        One pointer only.
+      </div>
+
+      <div class="rule">
+        <b>WIN</b>
+        Object goes in the bin.
+      </div>
+    </div>
+
+    <div class="game-shell">
+
+      <div class="game-hud">
+        <div class="hud-box">
+          <div class="hud-label">Time Left</div>
+          <div class="hud-value" id="timer">3:00</div>
+        </div>
+
+        <div class="hud-box">
+          <div class="hud-label">Knots Freed</div>
+          <div class="hud-value"><span id="knotsDone">0</span>/6</div>
+        </div>
+
+        <div class="hud-box">
+          <div class="hud-label">Status</div>
+          <div class="hud-value" id="gameStatus">Doom Pending</div>
+        </div>
+      </div>
+
+      <div id="gameBoard">
+
+        <svg id="ropeSvg" viewBox="0 0 1000 625" preserveAspectRatio="none">
+        </svg>
+
+        <!-- TARGET DOCKS -->
+        <div class="dock" data-dock="1" style="left:10%;top:15%;">1</div>
+        <div class="dock" data-dock="2" style="left:50%;top:10%;">2</div>
+        <div class="dock" data-dock="3" style="left:90%;top:18%;">3</div>
+        <div class="dock" data-dock="4" style="left:12%;top:78%;">4</div>
+        <div class="dock" data-dock="5" style="left:47%;top:88%;">5</div>
+        <div class="dock" data-dock="6" style="left:84%;top:72%;">6</div>
+
+        <!-- KNOTS -->
+        <div class="knot" data-knot="1" style="left:42%;top:40%;background:#ff3cac;">1</div>
+        <div class="knot" data-knot="2" style="left:58%;top:38%;background:#4de0ff;">2</div>
+        <div class="knot" data-knot="3" style="left:36%;top:57%;background:#ffe600;">3</div>
+        <div class="knot" data-knot="4" style="left:62%;top:58%;background:#39ff14;">4</div>
+        <div class="knot" data-knot="5" style="left:47%;top:66%;background:#ff6f1f;">5</div>
+        <div class="knot" data-knot="6" style="left:53%;top:27%;background:#a78bfa;">6</div>
+
+        <!-- TRAPPED OBJECT -->
+        <div class="object" id="trappedObject">
+          FAWYL<br>KEY
+        </div>
+
+        <!-- FINAL CONTAINER -->
+        <div class="container-bin" id="containerBin">
+          DROP<br>HERE
+        </div>
+
+        <!-- START SCREEN -->
+        <div class="game-overlay" id="startOverlay">
+          <h3>READY TO GET<br>TANGLED?</h3>
+          <p>
+            Drag each numbered knot to the matching numbered circle.
+            Once all six ropes are removed, grab the object and get it into the bin.
+          </p>
+          <button class="btn" onclick="startGame()">START THE DISASTER</button>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div class="game-overlay hidden" id="resultOverlay">
+          <h3 id="resultTitle">YOU DID IT.</h3>
+          <p id="resultCopy"></p>
+
+          <div class="controls-row">
+            <button class="btn" onclick="resetGame()">TRY AGAIN</button>
+            <button class="btn alt" onclick="goToFeedback()">GIVE FEEDBACK ↓</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="status-line" id="statusLine">
+        Match the knots to their numbered docks.
+      </div>
+
+      <div class="controls-row">
+        <button class="btn dark" onclick="resetGame()">Restart Game</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FEEDBACK -->
+  <section class="panel hidden" id="feedbackSection">
+    <span class="eyebrow">Tester Debrief</span>
+    <h2>Okay Tanya, tell us what happened.</h2>
+
+    <p>
+      There are no right answers here. If something sucked, say it sucked.
+      That is considerably more useful than pretending it was fine.
+    </p>
+
+    <div class="feedback-grid">
+
+      <div class="field">
+        <label for="funFeedback">Was it actually fun?</label>
+        <textarea
+          id="funFeedback"
+          placeholder="Fun, annoying, confusing, weirdly satisfying..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="confusingFeedback">Anything confusing?</label>
+        <textarea
+          id="confusingFeedback"
+          placeholder="Tell us where you got stuck or what wasn't obvious."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="difficultyFeedback">How was the difficulty?</label>
+        <textarea
+          id="difficultyFeedback"
+          placeholder="Too easy? Too hard? Just irritating enough?"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="changeFeedback">What would you change?</label>
+        <textarea
+          id="changeFeedback"
+          placeholder="Rules, timing, visuals, mechanics, anything."></textarea>
+      </div>
+
+    </div>
+
+    <div class="controls-row" style="justify-content:flex-start;margin-top:22px;">
+      <button class="btn pink" onclick="saveFeedback()">Save My Feedback</button>
+      <button class="btn alt" onclick="showCollectorCard()">Show My Card →</button>
+    </div>
+
+    <div class="feedback-saved hidden" id="feedbackSaved">
+      ✓ Saved on this device.
+    </div>
+  </section>
+
+
+  <!-- COLLECTOR CARD -->
+  <section class="panel hidden" id="collectorSection">
+    <span class="eyebrow">Tester Collector Card</span>
+    <h2>Card 07 belongs to you.</h2>
+
+    <p>
+      Tap the card to flip it. Yes, we made it shiny. Obviously.
+    </p>
+
+    <div class="collector-stage">
+
+      <div class="collector-card" id="collectorCard">
+
+        <div class="collector-face collector-front">
+          <div class="card-inner">
+
+            <div class="card-number">07 / 09</div>
+
+            <div>
+              <div class="card-label">FAWYL Original Tester</div>
+              <h3 class="card-title">TANYA</h3>
+              <div class="card-game">Tangled & Doomed</div>
+            </div>
+
+            <div class="card-label">
+              Season One Test Crew
+            </div>
+
+          </div>
+        </div>
+
+        <div class="collector-face collector-back">
+          <div class="card-inner">
+
+            <h3 class="back-logo">FAIL AT WHAT YOU LOVE</h3>
+
+            <p>
+              Tanya entered a perfectly reasonable situation involving one
+              trapped object and several pieces of string.
+            </p>
+
+            <p>
+              It immediately became everyone’s problem.
+            </p>
+
+            <div class="mini-stamp">
+              OFFICIAL ORIGINAL TESTER
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <p style="text-align:center;color:#aaa6b7;">
+      Card 07/09 • Tanya • Tangled & Doomed
+    </p>
+  </section>
+
+
+  <footer>
+    FAIL AT WHAT YOU LOVE • ORIGINAL TESTER PORTAL
+  </footer>
+
+</main>
+
+
+<script>
+/* =========================================================
+   SCRATCH CARD
+========================================================= */
+
+const scratchCanvas = document.getElementById("scratchCanvas");
+const scratchCtx = scratchCanvas.getContext("2d");
+
+let scratching = false;
+let scratchUnlocked = false;
+let scratchedMoves = 0;
+
+function sizeScratchCanvas(){
+  const rect = scratchCanvas.parentElement.getBoundingClientRect();
+
+  scratchCanvas.width = rect.width * window.devicePixelRatio;
+  scratchCanvas.height = rect.height * window.devicePixelRatio;
+
+  scratchCanvas.style.width = rect.width + "px";
+  scratchCanvas.style.height = rect.height + "px";
+
+  scratchCtx.setTransform(
+    window.devicePixelRatio,
+    0,
+    0,
+    window.devicePixelRatio,
+    0,
+    0
+  );
+
+  drawScratchCover(rect.width, rect.height);
+}
+
+function drawScratchCover(w,h){
+  scratchCtx.globalCompositeOperation = "source-over";
+
+  const grad = scratchCtx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,"#b9bec8");
+  grad.addColorStop(.25,"#f1f4f7");
+  grad.addColorStop(.48,"#878d98");
+  grad.addColorStop(.7,"#f4f5f6");
+  grad.addColorStop(1,"#a1a6af");
+
+  scratchCtx.fillStyle = grad;
+  scratchCtx.fillRect(0,0,w,h);
+
+  scratchCtx.fillStyle = "#111";
+  scratchCtx.font = "900 24px Space Grotesk";
+  scratchCtx.textAlign = "center";
+  scratchCtx.fillText("SCRATCH TO REVEAL", w/2, h/2 - 4);
+
+  scratchCtx.font = "700 13px Karla";
+  scratchCtx.fillText("something has gone terribly right", w/2, h/2 + 26);
+}
+
+function scratchAt(x,y){
+  scratchCtx.globalCompositeOperation = "destination-out";
+  scratchCtx.beginPath();
+  scratchCtx.arc(x,y,30,0,Math.PI*2);
+  scratchCtx.fill();
+
+  scratchedMoves++;
+
+  if(scratchedMoves > 35 && !scratchUnlocked){
+    scratchUnlocked = true;
+    document.getElementById("revealContinue").classList.remove("hidden");
+  }
+}
+
+function getScratchPoint(e){
+  const rect = scratchCanvas.getBoundingClientRect();
+
+  if(e.touches && e.touches[0]){
+    return {
+      x:e.touches[0].clientX - rect.left,
+      y:e.touches[0].clientY - rect.top
+    };
+  }
+
+  return {
+    x:e.clientX - rect.left,
+    y:e.clientY - rect.top
+  };
+}
+
+scratchCanvas.addEventListener("pointerdown",e=>{
+  scratching = true;
+  const p = getScratchPoint(e);
+  scratchAt(p.x,p.y);
+});
+
+scratchCanvas.addEventListener("pointermove",e=>{
+  if(!scratching) return;
+  const p = getScratchPoint(e);
+  scratchAt(p.x,p.y);
+});
+
+window.addEventListener("pointerup",()=>{
+  scratching = false;
+});
+
+window.addEventListener("resize",()=>{
+  if(!scratchUnlocked){
+    sizeScratchCanvas();
+  }
+});
+
+window.addEventListener("load",sizeScratchCanvas);
+
+function unlockGame(){
+  const gameSection = document.getElementById("gameSection");
+  gameSection.classList.remove("hidden");
+
+  setTimeout(()=>{
+    gameSection.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+    drawRopes();
+  },100);
+}
+
+
+/* =========================================================
+   TANGLED & DOOMED GAME
+========================================================= */
+
+const board = document.getElementById("gameBoard");
+const ropeSvg = document.getElementById("ropeSvg");
+const trappedObject = document.getElementById("trappedObject");
+const containerBin = document.getElementById("containerBin");
+
+const knots = [...document.querySelectorAll(".knot")];
+const docks = [...document.querySelectorAll(".dock")];
+
+let gameRunning = false;
+let timeLeft = 180;
+let timerInterval = null;
+
+let freedKnots = new Set();
+
+let dragging = null;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+let objectDragging = false;
+let objectOffsetX = 0;
+let objectOffsetY = 0;
+
+const ropeColors = {
+  1:"#ff3cac",
+  2:"#4de0ff",
+  3:"#ffe600",
+  4:"#39ff14",
+  5:"#ff6f1f",
+  6:"#a78bfa"
+};
+
+
+function startGame(){
+  resetPositions();
+
+  gameRunning = true;
+  timeLeft = 180;
+
+  document.getElementById("startOverlay").classList.add("hidden");
+  document.getElementById("resultOverlay").classList.add("hidden");
+
+  document.getElementById("gameStatus").textContent = "Currently Tangled";
+  document.getElementById("statusLine").textContent =
+    "Match each numbered knot to its numbered dock.";
+
+  updateTimer();
+
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    updateTimer();
+
+    if(timeLeft <= 0){
+      endGame(false);
+    }
+  },1000);
+
+  drawRopes();
+}
+
+
+function updateTimer(){
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+
+  const timer = document.getElementById("timer");
+
+  timer.textContent =
+    `${mins}:${secs.toString().padStart(2,"0")}`;
+
+  if(timeLeft <= 30){
+    timer.classList.add("timer-danger");
+  }else{
+    timer.classList.remove("timer-danger");
+  }
+}
+
+
+function resetPositions(){
+  freedKnots.clear();
+
+  document.getElementById("knotsDone").textContent = "0";
+
+  const positions = {
+    1:[42,40],
+    2:[58,38],
+    3:[36,57],
+    4:[62,58],
+    5:[47,66],
+    6:[53,27]
+  };
+
+  knots.forEach(knot=>{
+    const n = knot.dataset.knot;
+
+    knot.style.left = positions[n][0] + "%";
+    knot.style.top = positions[n][1] + "%";
+
+    knot.classList.remove("done");
+  });
+
+  trappedObject.style.left = "50%";
+  trappedObject.style.top = "50%";
+
+  trappedObject.classList.remove("free");
+
+  containerBin.classList.remove("ready");
+
+  document.getElementById("gameStatus").textContent = "Doom Pending";
+
+  drawRopes();
+}
+
+
+function resetGame(){
+  clearInterval(timerInterval);
+
+  gameRunning = false;
+
+  resetPositions();
+
+  timeLeft = 180;
+  updateTimer();
+
+  document.getElementById("timer").classList.remove("timer-danger");
+
+  document.getElementById("resultOverlay").classList.add("hidden");
+  document.getElementById("startOverlay").classList.remove("hidden");
+
+  document.getElementById("statusLine").textContent =
+    "Match the knots to their numbered docks.";
+}
+
+
+function getCenter(el){
+  const boardRect = board.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+
+  return {
+    x:elRect.left - boardRect.left + elRect.width/2,
+    y:elRect.top - boardRect.top + elRect.height/2
+  };
+}
+
+
+function drawRopes(){
+  ropeSvg.innerHTML = "";
+
+  const boardRect = board.getBoundingClientRect();
+
+  if(boardRect.width === 0) return;
+
+  const objectCenter = getCenter(trappedObject);
+
+  knots.forEach(knot=>{
+    const id = knot.dataset.knot;
+
+    if(freedKnots.has(id)) return;
+
+    const k = getCenter(knot);
+
+    const scaleX = 1000 / boardRect.width;
+    const scaleY = 625 / boardRect.height;
+
+    const x1 = k.x * scaleX;
+    const y1 = k.y * scaleY;
+
+    const x2 = objectCenter.x * scaleX;
+    const y2 = objectCenter.y * scaleY;
+
+    const bendX =
+      ((x1+x2)/2) +
+      (id % 2 === 0 ? 120 : -120);
+
+    const bendY =
+      ((y1+y2)/2) +
+      ((Number(id)-3) * 28);
+
+    const path = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+
+    path.setAttribute(
+      "d",
+      `M ${x1} ${y1}
+       Q ${bendX} ${bendY}
+       ${x2} ${y2}`
+    );
+
+    path.setAttribute("fill","none");
+    path.setAttribute("stroke",ropeColors[id]);
+    path.setAttribute("stroke-width","12");
+    path.setAttribute("stroke-linecap","round");
+    path.setAttribute("opacity",".93");
+
+    ropeSvg.appendChild(path);
+  });
+}
+
+
+/* =========================================================
+   KNOT DRAGGING
+========================================================= */
+
+knots.forEach(knot=>{
+
+  knot.addEventListener("pointerdown",e=>{
+    if(!gameRunning) return;
+    if(knot.classList.contains("done")) return;
+
+    dragging = knot;
+
+    knot.setPointerCapture(e.pointerId);
+
+    const boardRect = board.getBoundingClientRect();
+    const knotRect = knot.getBoundingClientRect();
+
+    dragOffsetX =
+      e.clientX - (knotRect.left + knotRect.width/2);
+
+    dragOffsetY =
+      e.clientY - (knotRect.top + knotRect.height/2);
+
+    e.preventDefault();
+  });
+
+
+  knot.addEventListener("pointermove",e=>{
+    if(dragging !== knot || !gameRunning) return;
+
+    const rect = board.getBoundingClientRect();
+
+    let x =
+      e.clientX -
+      rect.left -
+      dragOffsetX;
+
+    let y =
+      e.clientY -
+      rect.top -
+      dragOffsetY;
+
+    x = Math.max(30,Math.min(rect.width - 30,x));
+    y = Math.max(30,Math.min(rect.height - 30,y));
+
+    knot.style.left = x + "px";
+    knot.style.top = y + "px";
+
+    drawRopes();
+  });
+
+
+  knot.addEventListener("pointerup",()=>{
+    if(dragging !== knot) return;
+
+    checkKnotDock(knot);
+
+    dragging = null;
+  });
+
+});
+
+
+function checkKnotDock(knot){
+  const id = knot.dataset.knot;
+
+  const dock =
+    document.querySelector(`.dock[data-dock="${id}"]`);
+
+  const a = getCenter(knot);
+  const b = getCenter(dock);
+
+  const distance =
+    Math.hypot(a.x-b.x,a.y-b.y);
+
+  if(distance < 65){
+
+    knot.style.left = dock.style.left;
+    knot.style.top = dock.style.top;
+
+    knot.classList.add("done");
+    dock.classList.add("active");
+
+    freedKnots.add(id);
+
+    document.getElementById("knotsDone").textContent =
+      freedKnots.size;
+
+    document.getElementById("statusLine").textContent =
+      `Knot ${id} freed. ${6-freedKnots.size} left.`;
+
+    drawRopes();
+
+    if(freedKnots.size === 6){
+      freeObject();
+    }
+
+  }else{
+    document.getElementById("statusLine").textContent =
+      `Nope. Knot ${id} belongs in circle ${id}.`;
+  }
+}
+
+
+function freeObject(){
+  trappedObject.classList.add("free");
+  containerBin.classList.add("ready");
+
+  document.getElementById("gameStatus").textContent =
+    "OBJECT FREE";
+
+  document.getElementById("statusLine").textContent =
+    "IT'S FREE. Grab it and drag it into the bin!";
+}
+
+
+/* =========================================================
+   OBJECT DRAGGING
+========================================================= */
+
+trappedObject.addEventListener("pointerdown",e=>{
+  if(!gameRunning) return;
+  if(!trappedObject.classList.contains("free")) return;
+
+  objectDragging = true;
+
+  trappedObject.setPointerCapture(e.pointerId);
+
+  const rect = trappedObject.getBoundingClientRect();
+
+  objectOffsetX =
+    e.clientX - (rect.left + rect.width/2);
+
+  objectOffsetY =
+    e.clientY - (rect.top + rect.height/2);
+
+  e.preventDefault();
+});
+
+
+trappedObject.addEventListener("pointermove",e=>{
+  if(!objectDragging || !gameRunning) return;
+
+  const rect = board.getBoundingClientRect();
+
+  let x =
+    e.clientX -
+    rect.left -
+    objectOffsetX;
+
+  let y =
+    e.clientY -
+    rect.top -
+    objectOffsetY;
+
+  x = Math.max(45,Math.min(rect.width - 45,x));
+  y = Math.max(45,Math.min(rect.height - 45,y));
+
+  trappedObject.style.left = x + "px";
+  trappedObject.style.top = y + "px";
+});
+
+
+trappedObject.addEventListener("pointerup",()=>{
+  if(!objectDragging) return;
+
+  objectDragging = false;
+
+  checkObjectBin();
+});
+
+
+function checkObjectBin(){
+  const objectCenter = getCenter(trappedObject);
+  const binCenter = getCenter(containerBin);
+
+  const distance =
+    Math.hypot(
+      objectCenter.x-binCenter.x,
+      objectCenter.y-binCenter.y
+    );
+
+  if(distance < 105){
+    endGame(true);
+  }else{
+    document.getElementById("statusLine").textContent =
+      "So close. The freed object still has to make it into the bin.";
+  }
+}
+
+
+/* =========================================================
+   WIN / LOSE
+========================================================= */
+
+function endGame(win){
+  clearInterval(timerInterval);
+
+  gameRunning = false;
+
+  const overlay = document.getElementById("resultOverlay");
+  const title = document.getElementById("resultTitle");
+  const copy = document.getElementById("resultCopy");
+
+  overlay.classList.remove("hidden");
+
+  if(win){
+
+    title.textContent = "YOU UNTANGLED THE DOOM.";
+
+    copy.textContent =
+      `You freed the object with ${formatTime(timeLeft)} still on the clock. Against several pieces of digital string, you prevailed.`;
+
+    document.getElementById("gameStatus").textContent =
+      "SURVIVED";
+
+  }else{
+
+    title.textContent = "THE TANGLE WON.";
+
+    copy.textContent =
+      "Three minutes are up. The object now belongs to the rope. We assume they are very happy together.";
+
+    document.getElementById("gameStatus").textContent =
+      "DOOMED";
+  }
+}
+
+
+function formatTime(seconds){
+  const m = Math.floor(seconds/60);
+  const s = seconds%60;
+
+  return `${m}:${s.toString().padStart(2,"0")}`;
+}
+
+
+function goToFeedback(){
+  const section =
+    document.getElementById("feedbackSection");
+
+  section.classList.remove("hidden");
+
+  setTimeout(()=>{
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },100);
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+const feedbackFields = [
+  "funFeedback",
+  "confusingFeedback",
+  "difficultyFeedback",
+  "changeFeedback"
+];
+
+
+function saveFeedback(){
+  const data = {};
+
+  feedbackFields.forEach(id=>{
+    data[id] =
+      document.getElementById(id).value;
+  });
+
+  localStorage.setItem(
+    "fawylTanyaFeedback",
+    JSON.stringify(data)
+  );
+
+  const saved =
+    document.getElementById("feedbackSaved");
+
+  saved.classList.remove("hidden");
+
+  setTimeout(()=>{
+    saved.classList.add("hidden");
+  },3500);
+}
+
+
+function loadFeedback(){
+  const stored =
+    localStorage.getItem("fawylTanyaFeedback");
+
+  if(!stored) return;
+
+  try{
+    const data = JSON.parse(stored);
+
+    feedbackFields.forEach(id=>{
+      if(data[id]){
+        document.getElementById(id).value =
+          data[id];
+      }
+    });
+
+  }catch(err){
+    console.log("Could not load feedback.");
+  }
+}
+
+
+function showCollectorCard(){
+  saveFeedback();
+
+  const section =
+    document.getElementById("collectorSection");
+
+  section.classList.remove("hidden");
+
+  setTimeout(()=>{
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },100);
+}
+
+loadFeedback();
+
+
+/* =========================================================
+   COLLECTOR CARD
+========================================================= */
+
+document
+  .getElementById("collectorCard")
+  .addEventListener("click",function(){
+    this.classList.toggle("flipped");
+  });
+
+
+/* redraw strings if screen changes */
+window.addEventListener("resize",()=>{
+  if(!document
+      .getElementById("gameSection")
+      .classList.contains("hidden")){
+    drawRopes();
+  }
+});
+</script>
+
+</body>
+</html>
